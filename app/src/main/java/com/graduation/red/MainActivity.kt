@@ -1,10 +1,6 @@
 package com.graduation.red
 
-import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.view.WindowManager
 import com.graduation.red.base.BaseActivity
 import com.graduation.red.databinding.ActivityMainBinding
 

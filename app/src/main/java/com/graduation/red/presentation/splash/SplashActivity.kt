@@ -1,4 +1,4 @@
-package com.graduation.red.splash
+package com.graduation.red.presentation.splash
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -23,7 +23,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
         initSplashScreen()
     }
 
-    private fun initSplashScreen(){
+    private fun initSplashScreen() {
         window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN
@@ -34,17 +34,4 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
             finish()
         }, 3000)
     }
-
-//    private fun showFadingText() {
-//        Handler(Looper.getMainLooper()).postDelayed({
-//            binding.textView2.visibility = View.VISIBLE
-//        }, 2000)
-//
-
-//        var endAction: Runnable?
-//        binding.textView2.animate().alpha(1f).setDuration(1000).setStartDelay(0).withEndAction(
-//            Runnable { binding.textView2.animate().alpha(0f).setDuration(1000).startDelay = 2000 }.also {
-//                endAction = it
-//            }
-//        )
-    }
+}
