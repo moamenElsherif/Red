@@ -1,5 +1,6 @@
 package com.graduation.red.presentation.tutorial
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -8,6 +9,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.graduation.red.R
 import com.graduation.red.base.BaseActivity
 import com.graduation.red.databinding.ActivityTutorialBinding
+import com.graduation.red.presentation.authentication.AuthenticationActivity
 import com.graduation.red.presentation.enableFullScreen
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -67,6 +69,8 @@ class TutorialActivity : BaseActivity<ActivityTutorialBinding>() , TutorialListe
     }
 
     override fun clickStart() {
+        val intent = Intent(this , AuthenticationActivity::class.java)
+        startActivity(intent)
         finish()
     }
 }

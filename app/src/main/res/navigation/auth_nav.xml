@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/auth_nav"
+    app:startDestination="@id/loginWithNumberFragment">
+
+    <fragment
+        android:id="@+id/loginWithNumberFragment"
+        android:name="com.graduation.red.presentation.authentication.loginwithnumber.LoginWithNumberFragment"
+        android:label="LoginWithNumberFragment"
+        tools:layout="@layout/fragment_login_with_number">
+        <action
+            android:id="@+id/action_loginWithNumberFragment_to_loginWithPasswordFragment"
+            app:destination="@id/loginWithPasswordFragment" />
+        <action
+            android:id="@+id/action_loginWithNumberFragment_to_verifyNumberFragment"
+            app:destination="@id/verifyNumberFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginWithPasswordFragment"
+        android:name="com.graduation.red.presentation.authentication.loginwithpassword.LoginWithPasswordFragment"
+        android:label="LoginWithPasswordFragment"
+        tools:layout="@layout/fragment_login_with_password">
+
+        <argument
+            android:name="phone"
+            app:argType="string"
+            app:nullable="false" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_verify_number"
+        android:id="@+id/verifyNumberFragment"
+        android:name="com.graduation.red.presentation.authentication.verifyphonenumber.VerifyNumberFragment"
+        android:label="VerifyNumberFragment" />
+</navigation>

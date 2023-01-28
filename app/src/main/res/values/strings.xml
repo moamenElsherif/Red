@@ -13,4 +13,8 @@
     <string name="_20">+20</string>
     <string name="please_enter_your_phone_number">Please enter your phone number</string>
     <string name="please_enter_your_password">Please enter your password</string>
+    <string name="submit">Submit</string>
+    <string name="verify">Verify</string>
+    <string name="verification">Verification</string>
+    <string name="enter_your_code">Enter your code here</string>
 </resources>
