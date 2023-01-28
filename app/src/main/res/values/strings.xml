@@ -3,4 +3,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="next_btn">Next</string>
     <string name="back_btn">Back</string>
+    <string name="tutorial1">Save Lives By Giving</string>
+    <string name="tutorial2">Donate Blood</string>
+    <string name="tutorial3">Request Blood</string>
+    <string name="tutorial4">Help Save Lives</string>
+    <string name="start">Start</string>
 </resources>

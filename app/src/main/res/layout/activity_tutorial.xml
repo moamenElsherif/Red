@@ -5,18 +5,22 @@
 
     <data>
 
+        <variable
+            name="listener"
+            type="com.graduation.red.presentation.tutorial.TutorialListener" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/pink_light"
+        android:background="@color/white"
         tools:context=".presentation.tutorial.TutorialActivity">
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/tutorial_view_pager"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:animateLayoutChanges="true"
             app:layout_constraintBottom_toTopOf="@+id/tutorial_bottom"
             app:layout_constraintEnd_toEndOf="parent"
@@ -29,100 +33,129 @@
             android:id="@+id/tutorial_bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:paddingVertical="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintStart_toStartOf="parent">
 
-            <!--        <com.tbuonomo.viewpagerdotsindicator.DotsIndicator-->
-            <!--            android:id="@+id/pageIndicator"-->
-            <!--            android:layout_width="wrap_content"-->
-            <!--            android:layout_height="wrap_content"-->
-            <!--            app:dotsCornerRadius="8dp"-->
-            <!--            app:dotsSize="16dp"-->
-            <!--            app:dotsSpacing="4dp"-->
-            <!--            app:dotsWidthFactor="2.5"-->
-            <!--            app:progressMode="false"-->
-            <!--            app:layout_constraintEnd_toEndOf="parent"-->
-            <!--            app:layout_constraintStart_toStartOf="parent"-->
-            <!--            app:layout_constraintTop_toBottomOf="@+id/tutorial_view_pager"-->
+            <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+                android:id="@+id/pageIndicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:dotsColor="@color/pink_light"
+                app:dotsCornerRadius="8dp"
+                app:dotsSize="16dp"
+                app:dotsSpacing="4dp"
+                app:dotsWidthFactor="2.5"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:progressMode="false"
+                app:selectedDotColor="@color/bright_red" />
 
-            <!--            />-->
-
-            <Button
+            <androidx.cardview.widget.CardView
                 android:id="@+id/btn_start"
                 android:layout_width="341dp"
                 android:layout_height="55dp"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:textStyle="bold"
                 android:visibility="gone"
+                app:cardCornerRadius="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.appcompat.widget.LinearLayoutCompat
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/bright_red"
+                    android:onClick="@{()-> listener.clickStart()}"
+                    android:text="@string/start"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
                 android:id="@+id/nextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_marginEnd="30dp"
-                android:layout_marginBottom="100dp"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:padding="4dp"
+                android:onClick="@{()-> listener.clickNext()}"
+                app:cardCornerRadius="6dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/tvNext"
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/next_btn"
-                    android:textColor="@color/pink_dark"
-                    android:layout_marginEnd="4dp"
-                    android:textSize="16sp" />
+                    android:background="@color/bright_red"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
 
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/arrow"
-                    />
+                    <TextView
+                        android:id="@+id/tvNext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="4dp"
+                        android:text="@string/next_btn"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/arrow" />
 
 
-            </androidx.appcompat.widget.LinearLayoutCompat>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </androidx.cardview.widget.CardView>
 
-            <androidx.appcompat.widget.LinearLayoutCompat
+            <androidx.cardview.widget.CardView
                 android:id="@+id/backView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="100dp"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:padding="4dp"
+                android:onClick="@{()-> listener.clickBack()}"
+                app:cardCornerRadius="6dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginEnd="4dp"
-                    android:src="@drawable/arrow"
-                    android:scaleX="-1" />
-
-                <TextView
-                    android:id="@+id/tvBack"
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/pink_dark"
-                    android:text="@string/back_btn"
-                    android:layout_marginStart="4dp"
-                    android:textSize="16sp" />
+                    android:background="@color/bright_red"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
 
-            </androidx.appcompat.widget.LinearLayoutCompat>
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginEnd="4dp"
+                        android:scaleX="-1"
+                        android:src="@drawable/arrow" />
+
+                    <TextView
+                        android:id="@+id/tvBack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:text="@string/back_btn"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.cardview.widget.CardView>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
