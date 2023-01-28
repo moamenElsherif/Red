@@ -97,7 +97,7 @@
                     android:background="@color/bright_red"
                     android:gravity="center"
                     android:orientation="horizontal"
-                    android:padding="8dp">
+                    android:padding="10dp">
 
                     <TextView
                         android:id="@+id/tvNext"
@@ -134,7 +134,7 @@
                     android:background="@color/bright_red"
                     android:gravity="center"
                     android:orientation="horizontal"
-                    android:padding="8dp">
+                    android:padding="10dp">
 
                     <ImageView
                         android:layout_width="24dp"

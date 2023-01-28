@@ -12,8 +12,9 @@ import com.graduation.red.MainActivity
 import com.graduation.red.R
 import com.graduation.red.base.BaseActivity
 import com.graduation.red.databinding.ActivitySplashBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : BaseActivity<ActivitySplashBinding>() {
     override val layoutRes: Int

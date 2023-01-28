@@ -5,7 +5,9 @@ import android.os.Bundle
 import com.graduation.red.base.BaseActivity
 import com.graduation.red.databinding.ActivityMainBinding
 import com.graduation.red.presentation.tutorial.TutorialActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>() {
     override val layoutRes: Int
         get() = R.layout.activity_main

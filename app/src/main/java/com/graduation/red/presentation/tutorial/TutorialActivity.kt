@@ -9,7 +9,9 @@ import com.graduation.red.R
 import com.graduation.red.base.BaseActivity
 import com.graduation.red.databinding.ActivityTutorialBinding
 import com.graduation.red.presentation.enableFullScreen
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class TutorialActivity : BaseActivity<ActivityTutorialBinding>() , TutorialListener {
     override val layoutRes: Int
         get() = R.layout.activity_tutorial
