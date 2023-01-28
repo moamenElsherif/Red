@@ -13,8 +13,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         get() = R.layout.activity_main
 
     override fun initUI(savedInstanceState: Bundle?) {
-        val intent = Intent(this , TutorialActivity::class.java)
-        startActivity(intent)
     }
 
 }

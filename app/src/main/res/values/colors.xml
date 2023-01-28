@@ -11,4 +11,5 @@
     <color name="main_color">#FFC0CB</color>
     <color name="pink_dark">#ff748c</color>
     <color name="pink_light">#fff3f5</color>
+    <color name="dark_red">#be0000</color>
 </resources>

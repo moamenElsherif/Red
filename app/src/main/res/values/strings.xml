@@ -8,4 +8,9 @@
     <string name="tutorial3">Request Blood</string>
     <string name="tutorial4">Help Save Lives</string>
     <string name="start">Start</string>
+    <string name="login">Login</string>
+    <string name="sign_to_continue">sign in to continue</string>
+    <string name="_20">+20</string>
+    <string name="please_enter_your_phone_number">Please enter your phone number</string>
+    <string name="please_enter_your_password">Please enter your password</string>
 </resources>
