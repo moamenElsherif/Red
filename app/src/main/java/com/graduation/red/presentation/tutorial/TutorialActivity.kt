@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.viewpager2.widget.ViewPager2
+import com.graduation.red.MainActivity
 import com.graduation.red.R
 import com.graduation.red.base.BaseActivity
 import com.graduation.red.databinding.ActivityTutorialBinding
@@ -69,8 +70,9 @@ class TutorialActivity : BaseActivity<ActivityTutorialBinding>() , TutorialListe
     }
 
     override fun clickStart() {
-        val intent = Intent(this , AuthenticationActivity::class.java)
-        startActivity(intent)
+        val intentAuth = Intent(this , AuthenticationActivity::class.java)
+        val intentMain = Intent(this , MainActivity::class.java)
+        startActivity(intentMain)
         finish()
     }
 }
