@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "428914266511",
+    "project_id": "graduation-red",
+    "storage_bucket": "graduation-red.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:428914266511:android:0749be534a26d4d9dc3bfa",
+        "android_client_info": {
+          "package_name": "com.graduation.red"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "428914266511-sg95hnsfk8po7it5q2epq1qr3dhl99ls.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmgSuH2BGxu7LPVzkHjhd_Pxo8U-DqtX8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "428914266511-sg95hnsfk8po7it5q2epq1qr3dhl99ls.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

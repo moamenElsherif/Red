@@ -72,7 +72,7 @@ class TutorialActivity : BaseActivity<ActivityTutorialBinding>() , TutorialListe
     override fun clickStart() {
         val intentAuth = Intent(this , AuthenticationActivity::class.java)
         val intentMain = Intent(this , MainActivity::class.java)
-        startActivity(intentMain)
+        startActivity(intentAuth)
         finish()
     }
 }

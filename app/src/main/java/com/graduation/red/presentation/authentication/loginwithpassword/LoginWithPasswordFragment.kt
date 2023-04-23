@@ -18,7 +18,7 @@ class LoginWithPasswordFragment : BaseFragment<FragmentLoginWithPasswordBinding>
     private val args: LoginWithPasswordFragmentArgs by navArgs()
 
     override fun initUI(savedInstanceState: Bundle?) {
-        binding.textView3.text = "+20${args.phone}"
+        binding.tvPhoneNumber.text = args.phone.toString()
     }
 
 }

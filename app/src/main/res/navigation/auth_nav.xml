@@ -29,9 +29,37 @@
             app:argType="string"
             app:nullable="false" />
     </fragment>
+
     <fragment
-        tools:layout="@layout/fragment_verify_number"
         android:id="@+id/verifyNumberFragment"
         android:name="com.graduation.red.presentation.authentication.verifyphonenumber.VerifyNumberFragment"
-        android:label="VerifyNumberFragment" />
+        android:label="VerifyNumberFragment"
+        tools:layout="@layout/fragment_verify_number">
+        <action
+            android:id="@+id/action_verifyNumberFragment_to_createAccountFragment"
+            app:destination="@id/createAccountFragment" />
+        <argument
+            android:name="phoneNumber"
+            app:argType="string"
+            app:nullable="false"/>
+
+        <argument android:name="otp"
+            app:argType="string"
+            app:nullable="false"/>
+
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/createAccountFragment"
+        android:name="com.graduation.red.presentation.authentication.createaccount.CreateAccountFragment"
+        android:label="CreateAccountFragment"
+        tools:layout="@layout/fragment_create_account">
+
+        <argument
+            android:name="phoneNumber"
+            app:argType="string"
+            app:nullable="false"/>
+
+    </fragment>
 </navigation>
