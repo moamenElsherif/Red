@@ -29,6 +29,7 @@
     <string name="female">Female</string>
     <string name="blood_type">Blood Type</string>
     <string name="register">Register</string>
+    <string name="national_id">National Id</string>
 
     <string-array name="blood_types">
         <item>A+</item>
