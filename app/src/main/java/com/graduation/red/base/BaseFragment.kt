@@ -1,5 +1,6 @@
 package com.graduation.red.base
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.graduation.red.presentation.hideLoadingDialog
+import com.graduation.red.presentation.showLoadingDialog
 import java.lang.Exception
 
 abstract class BaseFragment<D : ViewDataBinding> : Fragment() {
@@ -19,7 +22,7 @@ abstract class BaseFragment<D : ViewDataBinding> : Fragment() {
     var isShown: Boolean = false
 
     protected lateinit var binding: D
-
+    private var progressDialog: Dialog? = null
 
     @get:LayoutRes
     protected abstract val layoutRes: Int
@@ -137,5 +140,13 @@ abstract class BaseFragment<D : ViewDataBinding> : Fragment() {
             }
         }
     }
+
+
+    fun showLoading() {
+        hideLoading()
+        progressDialog = showLoadingDialog(requireActivity(), null)
+    }
+
+    fun hideLoading() = hideLoadingDialog(progressDialog, requireActivity())
 
 }

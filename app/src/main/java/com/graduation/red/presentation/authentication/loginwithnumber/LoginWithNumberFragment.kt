@@ -4,16 +4,20 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.graduation.red.MainActivity
 import com.graduation.red.R
 import com.graduation.red.base.BaseFragment
 import com.graduation.red.databinding.FragmentLoginWithNumberBinding
+import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
 class LoginWithNumberFragment : BaseFragment<FragmentLoginWithNumberBinding>(),
@@ -23,10 +27,12 @@ class LoginWithNumberFragment : BaseFragment<FragmentLoginWithNumberBinding>(),
 
     private var number: String? = null
     private lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
-    // create instance of firebase auth
+
     lateinit var auth: FirebaseAuth
 
-    lateinit var storedVerificationId:String
+    private val db = Firebase.firestore
+
+    lateinit var storedVerificationId: String
     lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
 
     override fun initUI(savedInstanceState: Bundle?) {
@@ -36,35 +42,65 @@ class LoginWithNumberFragment : BaseFragment<FragmentLoginWithNumberBinding>(),
     }
 
     override fun onClickSubmit() {
-        sendOtp()
+        checkUserExists()
     }
 
-    private fun handleCallbacks(){
+    private fun checkUserExists() {
+        lifecycleScope.launch {
+            showLoading()
+            val collection = db.collection("Users")
+            collection.whereEqualTo("id", "+20${binding.tvPhoneNumber.text}").get()
+                .addOnSuccessListener { document ->
+                    try {
+                        hideLoading()
+                        if (document != null && document.documents.size > 0) navigateToLoginWithPassword()
+                        else sendOtp()
+                    } catch (ex: Exception) {
+                        Log.e("LoginWithNumber", ex.message.toString())
+                    }
+                }.addOnFailureListener {
+                    hideLoading()
+                    createToast("Error writing document")
+                }
+        }
+    }
+
+    private fun navigateToLoginWithPassword() {
+        findNavController().navigate(
+            LoginWithNumberFragmentDirections.actionLoginWithNumberFragmentToLoginWithPasswordFragment(
+                "+20${binding.tvPhoneNumber.text}"
+            )
+        )
+    }
+
+    private fun handleCallbacks() {
         callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
             // This method is called when the verification is completed
             override fun onVerificationCompleted(credential: PhoneAuthCredential) {
-                startActivity(Intent(this@LoginWithNumberFragment.requireContext(), MainActivity::class.java))
+                startActivity(
+                    Intent(
+                        this@LoginWithNumberFragment.requireContext(),
+                        MainActivity::class.java
+                    )
+                )
                 this@LoginWithNumberFragment.requireActivity().finish()
-                Log.d("GFG" , "onVerificationCompleted Success")
+                Log.d("GFG", "onVerificationCompleted Success")
             }
 
             // Called when verification is failed add log statement to see the exception
             override fun onVerificationFailed(e: FirebaseException) {
-                Log.d("GFG" , "onVerificationFailed  $e")
+                Log.d("GFG", "onVerificationFailed  $e")
             }
 
             override fun onCodeSent(
                 verificationId: String,
                 token: PhoneAuthProvider.ForceResendingToken
             ) {
-                Log.d("GFG","onCodeSent: $verificationId")
+                Log.d("GFG", "onCodeSent: $verificationId")
                 storedVerificationId = verificationId
                 resendToken = token
 
-                // Start a new activity using intent
-                // also send the storedVerificationId using intent
-                // we will use this id to send the otp back to firebase
                 findNavController().navigate(
                     LoginWithNumberFragmentDirections.actionLoginWithNumberFragmentToVerifyNumberFragment(
                         number ?: "",

@@ -2,6 +2,7 @@ package com.graduation.red.presentation.authentication.verifyphonenumber
 
 import android.os.Bundle
 import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.firebase.auth.FirebaseAuth
@@ -11,6 +12,8 @@ import com.google.firebase.auth.PhoneAuthProvider
 import com.graduation.red.R
 import com.graduation.red.base.BaseFragment
 import com.graduation.red.databinding.FragmentVerifyNumberBinding
+import com.graduation.red.presentation.authentication.loginwithnumber.LoginWithNumberFragmentDirections
+import kotlinx.coroutines.launch
 
 class VerifyNumberFragment : BaseFragment<FragmentVerifyNumberBinding>() {
     override val layoutRes: Int
@@ -41,22 +44,28 @@ class VerifyNumberFragment : BaseFragment<FragmentVerifyNumberBinding>() {
     }
 
     private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
-        auth.signInWithCredential(credential)
-            .addOnCompleteListener(this.requireActivity()) { task ->
-                if (task.isSuccessful) {
-                    findNavController().navigate(
-                        VerifyNumberFragmentDirections.actionVerifyNumberFragmentToCreateAccountFragment(
-                            args.phoneNumber
+        lifecycleScope.launch {
+            showLoading()
+            auth.signInWithCredential(credential)
+                .addOnCompleteListener(this@VerifyNumberFragment.requireActivity()) { task ->
+                    if (task.isSuccessful) {
+                        hideLoading()
+                        findNavController().navigate(
+                            VerifyNumberFragmentDirections.actionVerifyNumberFragmentToCreateAccountFragment(
+                                args.phoneNumber
+                            )
                         )
-                    )
-                } else {
-                    // Sign in failed, display a message and update the UI
-                    if (task.exception is FirebaseAuthInvalidCredentialsException) {
-                        // The verification code entered was invalid
-                        Toast.makeText(this.requireContext(), "Invalid OTP", Toast.LENGTH_SHORT)
-                            .show()
+                    } else {
+                        // Sign in failed, display a message and update the UI
+                        hideLoading()
+                        if (task.exception is FirebaseAuthInvalidCredentialsException) {
+                            // The verification code entered was invalid
+                            Toast.makeText(this@VerifyNumberFragment.requireContext(), "Invalid OTP", Toast.LENGTH_SHORT)
+                                .show()
+                        }
                     }
                 }
-            }
+        }
+
     }
 }
