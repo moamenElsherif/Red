@@ -14,7 +14,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
         tools:context=".presentation.tutorial.TutorialActivity">
 
         <androidx.viewpager2.widget.ViewPager2
@@ -44,7 +43,7 @@
                 android:id="@+id/pageIndicator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:dotsColor="@color/pink_light"
+                app:dotsColor="@color/white"
                 app:dotsCornerRadius="8dp"
                 app:dotsSize="16dp"
                 app:dotsSpacing="4dp"
@@ -54,7 +53,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:progressMode="false"
-                app:selectedDotColor="@color/bright_red" />
+                app:selectedDotColor="@color/pink_dark" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/btn_start"
@@ -80,82 +79,80 @@
 
             </androidx.cardview.widget.CardView>
 
-            <androidx.cardview.widget.CardView
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/nextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="30dp"
+                android:gravity="center"
                 android:onClick="@{()-> listener.clickNext()}"
-                app:cardCornerRadius="6dp"
+                android:padding="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <androidx.appcompat.widget.LinearLayoutCompat
+                <TextView
+                    android:id="@+id/tvNext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/bright_red"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:padding="10dp">
+                    android:text="@string/next_btn"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5" />
 
-                    <TextView
-                        android:id="@+id/tvNext"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="4dp"
-                        android:text="@string/next_btn"
-                        android:textColor="@color/white"
-                        android:textSize="16sp" />
-
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/arrow" />
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/arrow"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tvNext"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5" />
 
 
-                </androidx.appcompat.widget.LinearLayoutCompat>
-            </androidx.cardview.widget.CardView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/backView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:onClick="@{()-> listener.clickBack()}"
-                app:cardCornerRadius="6dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <androidx.appcompat.widget.LinearLayoutCompat
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/backView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/bright_red"
                     android:gravity="center"
+                    android:onClick="@{()-> listener.clickBack()}"
                     android:orientation="horizontal"
-                    android:padding="10dp">
+                    android:layout_marginStart="30dp"
+                    android:padding="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <ImageView
+                        android:id="@+id/back_arrow"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:layout_marginEnd="4dp"
                         android:scaleX="-1"
-                        android:src="@drawable/arrow" />
+                        android:src="@drawable/arrow"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.5" />
 
                     <TextView
                         android:id="@+id/tvBack"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
                         android:text="@string/back_btn"
-                        android:textColor="@color/white"
-                        android:textSize="16sp" />
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toEndOf="@+id/back_arrow"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.5"
+                        tools:layout_editor_absoluteX="10dp" />
 
-                </androidx.appcompat.widget.LinearLayoutCompat>
-
-            </androidx.cardview.widget.CardView>
-
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

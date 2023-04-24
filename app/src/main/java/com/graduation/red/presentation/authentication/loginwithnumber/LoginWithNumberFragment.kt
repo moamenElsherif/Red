@@ -46,23 +46,25 @@ class LoginWithNumberFragment : BaseFragment<FragmentLoginWithNumberBinding>(),
     }
 
     private fun checkUserExists() {
-        lifecycleScope.launch {
-            showLoading()
-            val collection = db.collection("Users")
-            collection.whereEqualTo("id", "+20${binding.tvPhoneNumber.text}").get()
-                .addOnSuccessListener { document ->
-                    try {
+        if (binding.tvPhoneNumber.text.trim().isNotEmpty()) {
+            lifecycleScope.launch {
+                showLoading()
+                val collection = db.collection("Users")
+                collection.whereEqualTo("id", "+20${binding.tvPhoneNumber.text}").get()
+                    .addOnSuccessListener { document ->
+                        try {
+                            hideLoading()
+                            if (document != null && document.documents.size > 0) navigateToLoginWithPassword()
+                            else sendOtp()
+                        } catch (ex: Exception) {
+                            Log.e("LoginWithNumber", ex.message.toString())
+                        }
+                    }.addOnFailureListener {
                         hideLoading()
-                        if (document != null && document.documents.size > 0) navigateToLoginWithPassword()
-                        else sendOtp()
-                    } catch (ex: Exception) {
-                        Log.e("LoginWithNumber", ex.message.toString())
+                        createToast("Error writing document")
                     }
-                }.addOnFailureListener {
-                    hideLoading()
-                    createToast("Error writing document")
-                }
-        }
+            }
+        } else createToast("invalid number")
     }
 
     private fun navigateToLoginWithPassword() {
@@ -80,8 +82,7 @@ class LoginWithNumberFragment : BaseFragment<FragmentLoginWithNumberBinding>(),
             override fun onVerificationCompleted(credential: PhoneAuthCredential) {
                 startActivity(
                     Intent(
-                        this@LoginWithNumberFragment.requireContext(),
-                        MainActivity::class.java
+                        this@LoginWithNumberFragment.requireContext(), MainActivity::class.java
                     )
                 )
                 this@LoginWithNumberFragment.requireActivity().finish()
@@ -94,8 +95,7 @@ class LoginWithNumberFragment : BaseFragment<FragmentLoginWithNumberBinding>(),
             }
 
             override fun onCodeSent(
-                verificationId: String,
-                token: PhoneAuthProvider.ForceResendingToken
+                verificationId: String, token: PhoneAuthProvider.ForceResendingToken
             ) {
                 Log.d("GFG", "onCodeSent: $verificationId")
                 storedVerificationId = verificationId
@@ -103,8 +103,7 @@ class LoginWithNumberFragment : BaseFragment<FragmentLoginWithNumberBinding>(),
 
                 findNavController().navigate(
                     LoginWithNumberFragmentDirections.actionLoginWithNumberFragmentToVerifyNumberFragment(
-                        number ?: "",
-                        storedVerificationId
+                        number ?: "", storedVerificationId
                     )
                 )
             }
@@ -123,12 +122,12 @@ class LoginWithNumberFragment : BaseFragment<FragmentLoginWithNumberBinding>(),
     }
 
     private fun sendVerificationCode(number: String) {
-        val options = PhoneAuthOptions.newBuilder(auth)
-            .setPhoneNumber(number) // Phone number to verify
-            .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
-            .setActivity(this.requireActivity()) // Activity (for callback binding)
-            .setCallbacks(callbacks) // OnVerificationStateChangedCallbacks
-            .build()
+        val options =
+            PhoneAuthOptions.newBuilder(auth).setPhoneNumber(number) // Phone number to verify
+                .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
+                .setActivity(this.requireActivity()) // Activity (for callback binding)
+                .setCallbacks(callbacks) // OnVerificationStateChangedCallbacks
+                .build()
         PhoneAuthProvider.verifyPhoneNumber(options)
         Log.d("GFG", "Auth started")
     }

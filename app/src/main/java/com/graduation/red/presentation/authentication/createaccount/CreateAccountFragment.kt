@@ -1,5 +1,7 @@
 package com.graduation.red.presentation.authentication.createaccount
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -10,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.graduation.red.MainActivity
 import com.graduation.red.R
 import com.graduation.red.base.BaseFragment
 import com.graduation.red.databinding.FragmentCreateAccountBinding
@@ -54,12 +57,26 @@ class CreateAccountFragment : BaseFragment<FragmentCreateAccountBinding>(), OnIt
             db.collection("Users").document(args.phoneNumber)
                 .set(user).addOnSuccessListener {
                     hideLoading()
+                    saveToSharedPref(user)
+                    openMainActivity()
                     createToast("DocumentSnapshot added successfully")
                 }.addOnFailureListener {
                     hideLoading()
                     createToast("failed -> $it")
                 }
         }
+    }
+
+    private fun saveToSharedPref(user: CreateAccountModel) {
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
+        with (sharedPref.edit()) {
+            putString(getString(R.string.save_user_to_shared_pref), user.toString())
+            apply()
+        }
+    }
+
+    private fun openMainActivity() {
+        val intent = Intent(this.requireContext(), MainActivity::class.java )
     }
 
     private fun getGender(): Int {
@@ -85,7 +102,7 @@ class CreateAccountFragment : BaseFragment<FragmentCreateAccountBinding>(), OnIt
             createToast("invalid password")
             return false
         }
-        if (binding.tvPassword.text != binding.tvConfirmPassword.text) {
+        if (binding.tvPassword.text.toString() != binding.tvConfirmPassword.text.toString()) {
             createToast("passwords aren't matching")
             return false
         }

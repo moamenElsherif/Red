@@ -31,6 +31,8 @@
     <string name="register">Register</string>
     <string name="national_id">National Id</string>
 
+    <string name="save_user_to_shared_pref">SAVE_USER_TO_SHARED_PREF</string>
+
     <string-array name="blood_types">
         <item>A+</item>
         <item>A-</item>

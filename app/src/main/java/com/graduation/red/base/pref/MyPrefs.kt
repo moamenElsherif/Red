@@ -9,6 +9,7 @@ import javax.inject.Inject
 
 class MyPrefs @Inject constructor(@ApplicationContext context: Context) : BasePreferenceStorage(context) {
     private  val tutorialState = "tutorialState"
+    private val userPref = "userPref"
 
     fun getTutorialState(): String? {
         return getString(tutorialState, "")
@@ -18,7 +19,15 @@ class MyPrefs @Inject constructor(@ApplicationContext context: Context) : BasePr
         putString(tutorialState, type)
     }
 
-    fun clear() {
-        remove(tutorialState)
+    fun setUserDetails(type: String){
+        putString(userPref , type)
+    }
+
+    fun getUserDetails(): String? {
+        return getString(userPref , "")
+    }
+
+    fun clearUserPref(){
+        putString(userPref , "")
     }
 }

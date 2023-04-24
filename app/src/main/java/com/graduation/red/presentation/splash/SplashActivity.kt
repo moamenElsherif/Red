@@ -11,6 +11,7 @@ import com.graduation.red.R
 import com.graduation.red.base.BaseActivity
 import com.graduation.red.base.pref.MyPrefs
 import com.graduation.red.databinding.ActivitySplashBinding
+import com.graduation.red.presentation.authentication.AuthenticationActivity
 import com.graduation.red.presentation.tutorial.TutorialActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -37,7 +38,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
             if (myPrefs.getTutorialState() != "displayed")
                 showTutorial()
             else{
-                openMain()
+                openAuth()
             }
         }, 3000)
     }
@@ -50,6 +51,11 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
     private fun openMain(){
         val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+    private fun openAuth(){
+        val intent = Intent(this, AuthenticationActivity::class.java)
         startActivity(intent)
         finish()
     }

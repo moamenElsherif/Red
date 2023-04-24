@@ -19,22 +19,22 @@ class TutorialAdapter(
         return when (position) {
             0 -> TutorialFragment.newInstance(
                 context.resources.getString(R.string.tutorial1),
-                R.drawable.tutorial_2
+                R.drawable.tutorial_1
             )
 
             1 -> TutorialFragment.newInstance(
                 context.resources.getString(R.string.tutorial2),
-                R.drawable.tutorial_2
+                R.drawable.tutorial2
             )
 
             2 -> TutorialFragment.newInstance(
                 context.resources.getString(R.string.tutorial3),
-                R.drawable.tutorial_2
+                R.drawable.tutorial3
             )
             else -> {
                 TutorialFragment.newInstance(
                     context.resources.getString(R.string.tutorial4),
-                    R.drawable.tutorial_2
+                    R.drawable.tutorial4
                 )
             }
         }

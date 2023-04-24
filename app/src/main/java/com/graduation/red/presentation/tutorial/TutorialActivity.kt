@@ -9,10 +9,12 @@ import androidx.viewpager2.widget.ViewPager2
 import com.graduation.red.MainActivity
 import com.graduation.red.R
 import com.graduation.red.base.BaseActivity
+import com.graduation.red.base.pref.MyPrefs
 import com.graduation.red.databinding.ActivityTutorialBinding
 import com.graduation.red.presentation.authentication.AuthenticationActivity
 import com.graduation.red.presentation.enableFullScreen
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class TutorialActivity : BaseActivity<ActivityTutorialBinding>() , TutorialListener {
@@ -21,7 +23,11 @@ class TutorialActivity : BaseActivity<ActivityTutorialBinding>() , TutorialListe
 
     private lateinit var slideViewPager: ViewPager2
 
+    @Inject
+    lateinit var myPrefs: MyPrefs
+
     override fun initUI(savedInstanceState: Bundle?) {
+        myPrefs.setTutorialState("displayed")
         binding.listener = this
         enableFullScreen(this)
         if (supportActionBar != null) {
