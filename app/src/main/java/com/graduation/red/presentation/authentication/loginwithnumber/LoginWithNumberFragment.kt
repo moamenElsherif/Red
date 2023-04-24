@@ -17,6 +17,7 @@ import com.graduation.red.MainActivity
 import com.graduation.red.R
 import com.graduation.red.base.BaseFragment
 import com.graduation.red.databinding.FragmentLoginWithNumberBinding
+import com.graduation.red.presentation.Constants
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
@@ -49,7 +50,7 @@ class LoginWithNumberFragment : BaseFragment<FragmentLoginWithNumberBinding>(),
         if (binding.tvPhoneNumber.text.trim().isNotEmpty()) {
             lifecycleScope.launch {
                 showLoading()
-                val collection = db.collection("Users")
+                val collection = db.collection(Constants.UsersDocument)
                 collection.whereEqualTo("id", "+20${binding.tvPhoneNumber.text}").get()
                     .addOnSuccessListener { document ->
                         try {

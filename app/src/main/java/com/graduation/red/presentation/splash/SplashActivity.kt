@@ -38,7 +38,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
             if (myPrefs.getTutorialState() != "displayed")
                 showTutorial()
             else{
-                openAuth()
+                openMain()
             }
         }, 3000)
     }

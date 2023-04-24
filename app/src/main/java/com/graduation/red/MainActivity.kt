@@ -21,6 +21,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     override fun initUI(savedInstanceState: Bundle?) {
         bottomNav = binding.bottomNav
         handleBottomNav()
+        bottomNav.selectedItemId = R.id.donate
     }
 
     private fun handleBottomNav() {

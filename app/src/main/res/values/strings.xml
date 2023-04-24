@@ -32,6 +32,9 @@
     <string name="national_id">National Id</string>
 
     <string name="save_user_to_shared_pref">SAVE_USER_TO_SHARED_PREF</string>
+    <string name="request">Request</string>
+    <string name="donate">Donate</string>
+    <string name="profile">Profile</string>
 
     <string-array name="blood_types">
         <item>A+</item>

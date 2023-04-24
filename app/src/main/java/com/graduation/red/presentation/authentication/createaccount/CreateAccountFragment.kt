@@ -16,6 +16,7 @@ import com.graduation.red.MainActivity
 import com.graduation.red.R
 import com.graduation.red.base.BaseFragment
 import com.graduation.red.databinding.FragmentCreateAccountBinding
+import com.graduation.red.presentation.Constants
 import kotlinx.coroutines.launch
 
 
@@ -54,7 +55,7 @@ class CreateAccountFragment : BaseFragment<FragmentCreateAccountBinding>(), OnIt
     private fun saveData(user: CreateAccountModel) {
         viewLifecycleOwner.lifecycleScope.launch {
             showLoading()
-            db.collection("Users").document(args.phoneNumber)
+            db.collection(Constants.UsersDocument).document(args.phoneNumber)
                 .set(user).addOnSuccessListener {
                     hideLoading()
                     saveToSharedPref(user)

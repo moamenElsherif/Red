@@ -2,11 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/request"
-        android:title="Request"  />
+        android:icon="@drawable/request"
+        android:title="@string/request"  />
     <item
         android:id="@+id/donate"
-        android:title="Donate" />
+        android:icon="@drawable/donate"
+        android:title="@string/donate" />
     <item
         android:id="@+id/settings"
-        android:title="Setting" />
+        android:icon="@drawable/profile"
+        android:title="@string/profile" />
 </menu>

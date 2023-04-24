@@ -10,6 +10,7 @@ import com.graduation.red.MainActivity
 import com.graduation.red.R
 import com.graduation.red.base.BaseFragment
 import com.graduation.red.databinding.FragmentLoginWithPasswordBinding
+import com.graduation.red.presentation.Constants
 import kotlinx.coroutines.launch
 
 
@@ -42,7 +43,7 @@ class LoginWithPasswordFragment : BaseFragment<FragmentLoginWithPasswordBinding>
             showLoading()
             viewLifecycleOwner.lifecycleScope.launch {
                 if (passwordValid()) {
-                    db.collection("Users").document(args.phone).get().addOnSuccessListener {
+                    db.collection(Constants.UsersDocument).document(args.phone).get().addOnSuccessListener {
                         hideLoading()
                         if (it != null) {
                             val password = it.data?.get("password")
