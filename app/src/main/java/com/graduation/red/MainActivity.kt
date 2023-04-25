@@ -25,7 +25,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
 
     private fun handleBottomNav() {
-        loadFragment(DonateFragment())
         bottomNav.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.donate -> {
