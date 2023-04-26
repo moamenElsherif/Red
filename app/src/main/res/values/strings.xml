@@ -43,6 +43,13 @@
     <string name="verified_phone_number">Verified Phone Number</string>
     <string name="message_to_donor">Message to Donor (optional)</string>
     <string name="submit_request">Submit Request</string>
+    <string name="wants_blood_for">wants blood for</string>
+    <string name="mobile">Mobile</string>
+    <string name="address">Address</string>
+    <string name="message">Message</string>
+    <string name="dot">:</string>
+    <string name="details">Details</string>
+    <string name="requests_nearby">Requests Nearby</string>
 
     <string-array name="blood_types">
         <item>A+</item>
