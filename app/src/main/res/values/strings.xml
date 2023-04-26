@@ -41,7 +41,7 @@
     <string name="request_date">Request Date</string>
     <string name="address_details">Donation Address Details</string>
     <string name="verified_phone_number">Verified Phone Number</string>
-    <string name="message_to_donor">Message to Donor</string>
+    <string name="message_to_donor">Message to Donor (optional)</string>
     <string name="submit_request">Submit Request</string>
 
     <string-array name="blood_types">

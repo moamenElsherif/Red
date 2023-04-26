@@ -107,9 +107,8 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:buttonTint="@color/bean_red"
-                            android:checked="true"
                             android:paddingStart="5dp"
-                            android:tag="1"
+                            android:tag="0"
                             android:text="@string/for_me"
                             android:textColor="@color/black"
                             android:textSize="16sp" />
@@ -128,26 +127,28 @@
                             android:layout_weight="1"
                             android:buttonTint="@color/bean_red"
                             android:paddingStart="5dp"
-                            android:tag="0"
+                            android:tag="1"
                             android:text="@string/for_other"
                             android:textColor="@color/black"
                             android:textSize="16sp" />
                     </RadioGroup>
 
-                    <View
-                        android:id="@+id/view31"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/black"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_name" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/name_view"
                         android:layout_width="match_parent"
-                        android:layout_height="60dp">
+                        android:layout_height="60dp"
+                        android:animateLayoutChanges="true">
+
+                        <View
+                            android:id="@+id/view31"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/black"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <EditText
                             android:id="@+id/tv_name"
@@ -228,10 +229,11 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <EditText
-                            android:id="@+id/editText"
+                            android:id="@+id/et_year"
                             android:layout_width="wrap_content"
                             android:layout_height="40dp"
                             android:layout_marginEnd="10dp"
+                            android:autofillHints=""
                             android:background="@drawable/bg_transparent_store"
                             android:hint="YYYY"
                             android:inputType="date"
@@ -247,10 +249,11 @@
                             app:layout_constraintVertical_bias="0.5" />
 
                         <EditText
-                            android:id="@+id/editText2"
+                            android:id="@+id/et_month"
                             android:layout_width="wrap_content"
                             android:layout_height="40dp"
                             android:layout_marginEnd="10dp"
+                            android:autofillHints=""
                             android:background="@drawable/bg_transparent_store"
                             android:hint="MM"
                             android:inputType="date"
@@ -261,14 +264,16 @@
                             android:textColorHint="@color/grey"
                             android:textSize="16sp"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/editText"
+                            app:layout_constraintEnd_toStartOf="@+id/et_year"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintVertical_bias="0.5" />
 
                         <EditText
+                            android:id="@+id/et_day"
                             android:layout_width="wrap_content"
                             android:layout_height="40dp"
                             android:layout_marginEnd="10dp"
+                            android:autofillHints=""
                             android:background="@drawable/bg_transparent_store"
                             android:hint="DD"
                             android:inputType="date"
@@ -279,85 +284,93 @@
                             android:textColorHint="@color/grey"
                             android:textSize="16sp"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/editText2"
+                            app:layout_constraintEnd_toStartOf="@+id/et_month"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintVertical_bias="0.5" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <View
-                        android:id="@+id/view15"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/black"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_national_code" />
-
-
-                    <RadioGroup
-                        android:id="@+id/radioGroup2"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:weightSum="2"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/view15">
-
-                        <RadioButton
-                            android:id="@+id/rb_male"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginEnd="3dp"
-                            android:layout_weight="1"
-                            android:buttonTint="@color/bean_red"
-                            android:checked="true"
-                            android:drawableEnd="@drawable/male_gender"
-                            android:paddingHorizontal="15dp"
-                            android:tag="1"
-                            android:text="@string/male"
-                            android:textColor="@color/black"
-                            android:textSize="16sp" />
-
-                        <View
-                            android:id="@+id/view6"
-                            android:layout_width="1dp"
-                            android:layout_height="match_parent"
-                            android:background="@color/black" />
-
-                        <RadioButton
-                            android:id="@+id/rb_female"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="3dp"
-                            android:layout_weight="1"
-                            android:buttonTint="@color/bean_red"
-                            android:drawableEnd="@drawable/female"
-                            android:paddingHorizontal="15dp"
-                            android:tag="0"
-                            android:text="@string/female"
-                            android:textColor="@color/black" />
-
-                    </RadioGroup>
-
-                    <View
-                        android:id="@+id/view7"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/black"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
-
-
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/gender_view"
                         android:layout_width="match_parent"
                         android:layout_height="60dp">
+
+                        <View
+                            android:id="@+id/view15"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/black"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                        <RadioGroup
+                            android:id="@+id/radioGroup2"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:weightSum="2"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/view15">
+
+                            <RadioButton
+                                android:id="@+id/rb_male"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginEnd="3dp"
+                                android:layout_weight="1"
+                                android:buttonTint="@color/bean_red"
+                                android:checked="true"
+                                android:drawableEnd="@drawable/male_gender"
+                                android:paddingHorizontal="15dp"
+                                android:tag="1"
+                                android:text="@string/male"
+                                android:textColor="@color/black"
+                                android:textSize="16sp" />
+
+                            <View
+                                android:id="@+id/view6"
+                                android:layout_width="1dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/black" />
+
+                            <RadioButton
+                                android:id="@+id/rb_female"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="3dp"
+                                android:layout_weight="1"
+                                android:buttonTint="@color/bean_red"
+                                android:drawableEnd="@drawable/female"
+                                android:paddingHorizontal="15dp"
+                                android:tag="0"
+                                android:text="@string/female"
+                                android:textColor="@color/black" />
+
+                        </RadioGroup>
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/blood_type_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp">
+
+                        <View
+                            android:id="@+id/view7"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/black"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
                             android:id="@+id/tv_blood_type"
@@ -395,6 +408,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
 
                     <EditText
+                        android:id="@+id/et_phone_number"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         android:background="@android:color/transparent"
@@ -421,6 +435,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
 
                     <EditText
+                        android:id="@+id/et_donation_address"
                         android:layout_width="match_parent"
                         android:layout_height="90dp"
                         android:background="@android:color/transparent"
@@ -450,6 +465,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
 
                     <EditText
+                        android:id="@+id/et_message"
                         android:layout_width="match_parent"
                         android:layout_height="90dp"
                         android:background="@android:color/transparent"

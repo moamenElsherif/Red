@@ -2,24 +2,33 @@ package com.graduation.red.presentation.authentication.loginwithpassword
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.graduation.red.MainActivity
 import com.graduation.red.R
 import com.graduation.red.base.BaseFragment
+import com.graduation.red.base.pref.MyPrefs
 import com.graduation.red.databinding.FragmentLoginWithPasswordBinding
 import com.graduation.red.presentation.Constants
+import com.graduation.red.presentation.authentication.createaccount.CreateAccountModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class LoginWithPasswordFragment : BaseFragment<FragmentLoginWithPasswordBinding>() {
     override val layoutRes: Int
         get() = R.layout.fragment_login_with_password
 
     private val args: LoginWithPasswordFragmentArgs by navArgs()
     private val db = Firebase.firestore
+
+    @Inject
+    lateinit var myPrefs: MyPrefs
 
     override fun initUI(savedInstanceState: Bundle?) {
         binding.tvPhoneNumber.text = args.phone
@@ -49,7 +58,10 @@ class LoginWithPasswordFragment : BaseFragment<FragmentLoginWithPasswordBinding>
                             val password = it.data?.get("password")
                             if (password == binding.tvPassword.text.trim()
                                     .toString()
-                            ) goToMainActivity()
+                            ) {
+                                saveDataToPref(it.toObject<CreateAccountModel>())
+                                goToMainActivity()
+                            }
                             else createToast("incorrect password")
                         }
                     }
@@ -57,6 +69,22 @@ class LoginWithPasswordFragment : BaseFragment<FragmentLoginWithPasswordBinding>
             }
         }
 
+    }
+
+    private fun saveDataToPref(model: CreateAccountModel?) {
+        if (model!= null) {
+            myPrefs.clearUserPref()
+            myPrefs.setUserDetails(
+                CreateAccountModel(
+                    firstName = model.firstName,
+                    lastName = model.lastName,
+                    id = model.id,
+                    gender = model.gender,
+                    bloodType = model.bloodType,
+                    password = ""
+                )
+            )
+        }
     }
 
     private fun goToMainActivity() {
