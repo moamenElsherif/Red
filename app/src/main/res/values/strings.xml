@@ -50,6 +50,7 @@
     <string name="dot">:</string>
     <string name="details">Details</string>
     <string name="requests_nearby">Requests Nearby</string>
+    <string name="pick_location">Pick Location</string>
 
     <string-array name="blood_types">
         <item>A+</item>
