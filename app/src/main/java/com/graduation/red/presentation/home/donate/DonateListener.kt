@@ -1,6 +1,6 @@
 package com.graduation.red.presentation.home.donate
 
 interface DonateListener {
-    fun clickDetails()
-    fun clickDonate()
+    fun clickDetails(requestId: String)
+    fun clickDonate(requestId: String)
 }

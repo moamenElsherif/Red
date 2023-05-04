@@ -1,30 +1,33 @@
 package com.graduation.red.presentation.home.donate
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
 import com.graduation.red.R
 import com.graduation.red.base.BaseFragment
+import com.graduation.red.base.pref.MyPrefs
 import com.graduation.red.databinding.FragmentDonateBinding
+import com.graduation.red.presentation.Constants
 import com.graduation.red.presentation.Constants.Companion.RequestDocument
-import com.graduation.red.presentation.authentication.createaccount.CreateAccountModel
 import com.graduation.red.presentation.home.request.RequestsModel
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-
-class DonateFragment : BaseFragment<FragmentDonateBinding>() , DonateListener {
+@AndroidEntryPoint
+class DonateFragment : BaseFragment<FragmentDonateBinding>(), DonateListener {
     override val layoutRes: Int
         get() = R.layout.fragment_donate
 
     private val donateAdapter: DonateAdapter = DonateAdapter(this)
     private val db = Firebase.firestore
 
+    @Inject
+    lateinit var myPrefs: MyPrefs
+
+    var verifiedRequestByUserCount = 0
 
     override fun initUI(savedInstanceState: Bundle?) {
         getRequestsList()
@@ -35,7 +38,6 @@ class DonateFragment : BaseFragment<FragmentDonateBinding>() , DonateListener {
         db.collection(RequestDocument).get().addOnSuccessListener {
             hideLoading()
             val list = it.toObjects<RequestsModel>()
-            binding.tvRequestCount.text = list.size.toString()
             initAdapter(list)
         }.addOnFailureListener {
             hideLoading()
@@ -51,16 +53,53 @@ class DonateFragment : BaseFragment<FragmentDonateBinding>() , DonateListener {
                     this.isSmoothScrolling
                 }
                 setHasFixedSize(false)
-                donateAdapter.submitList(result)
+                val list = getRequestListWithoutVerifiedRequests(result)
+                donateAdapter.submitList(list)
                 adapter = donateAdapter
+                binding.tvRequestCount.text = list.size.toString()
             }
         }
     }
-    override fun clickDetails() {
+
+    private fun getRequestListWithoutVerifiedRequests(result: List<RequestsModel>): List<RequestsModel> {
+        val list = mutableListOf<RequestsModel>()
+        val userId = myPrefs.getUserDetails().id
+        if (result.isNotEmpty()) {
+            result.forEach {
+                if (!it.verifiedDonorsId.contains(userId))
+                    list.add(it)
+                else verifiedRequestByUserCount += 1
+            }
+        }
+        return list
+    }
+
+    override fun clickDetails(requestId: String) {
 
     }
 
-    override fun clickDonate() {
+    override fun clickDonate(requestId: String) {
+        DonateCheckDialog().showDialog(
+            this.requireContext(),
+            object : DonateCheckDialog.DonateCheckListener {
+                override fun onClickNo() {
 
+                }
+
+                override fun onClickYes() {
+                    submitUserDonation(requestId)
+                }
+            })
+    }
+
+    private fun submitUserDonation(requestId: String) {
+        val newElement = myPrefs.getUserDetails().id
+        val document = db.collection(Constants.RequestDocument).document(requestId)
+        document.update("verifiedDonorsId", FieldValue.arrayUnion(newElement))
+            .addOnSuccessListener {
+                getRequestsList()
+            }.addOnFailureListener { e ->
+                createToast(e.toString())
+            }
     }
 }

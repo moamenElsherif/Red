@@ -50,6 +50,8 @@
     <string name="dot">:</string>
     <string name="details">Details</string>
     <string name="requests_nearby">Requests Nearby</string>
+    <string name="are_you_sure_you_will_donate">Are You Sure You Will Donate?</string>
+    <string name="by_verifying_donation_request_owner_will_be_notified">By verifying donation, request owner will be notified</string>
 
     <string-array name="blood_types">
         <item>A+</item>

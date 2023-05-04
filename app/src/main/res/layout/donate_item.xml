@@ -26,8 +26,8 @@
             android:layout_marginHorizontal="5dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            app:cardCornerRadius="10dp"
-            app:cardBackgroundColor="@color/pink_light"
+            app:cardCornerRadius="15dp"
+            app:cardBackgroundColor="@color/off_white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -99,10 +99,11 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/to_who"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:textColor="@color/black"
+                        android:text="@{item.getForWhoString()}"
                         android:textSize="12sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="@+id/user_name"
@@ -114,8 +115,8 @@
                     android:id="@+id/constraintLayout2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:padding="5dp"
+                    android:layout_marginTop="5dp"
+                    android:paddingHorizontal="5dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
@@ -145,7 +146,7 @@
                         android:id="@+id/appCompatTextView2"
                         android:layout_width="75dp"
                         android:layout_height="wrap_content"
-                        android:padding="5dp"
+                        android:padding="2dp"
                         android:text="@string/mobile"
                         android:textColor="@color/grey"
                         app:layout_constraintStart_toStartOf="parent"
@@ -155,7 +156,7 @@
                         android:id="@+id/appCompatTextView3"
                         android:layout_width="75dp"
                         android:layout_height="wrap_content"
-                        android:padding="5dp"
+                        android:padding="2dp"
                         android:text="@string/address"
                         android:textColor="@color/grey"
                         app:layout_constraintStart_toStartOf="parent"
@@ -185,7 +186,7 @@
                         android:id="@+id/appCompatTextView4"
                         android:layout_width="75dp"
                         android:layout_height="wrap_content"
-                        android:padding="5dp"
+                        android:padding="2dp"
                         android:text="@string/message"
                         android:textColor="@color/grey"
                         app:layout_constraintStart_toStartOf="parent"
@@ -199,6 +200,7 @@
                         android:text="@{item.messageToDonor}"
                         app:layout_constraintStart_toEndOf="@+id/dot3"
                         app:layout_constraintTop_toTopOf="@+id/dot3"
+                        app:layout_constraintEnd_toEndOf="parent"
                         tools:text="please come and donate becauseplease come and donate because" />
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -239,7 +241,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@color/bean_red"
-                            android:onClick="@{()-> listener.clickDonate()}"
+                            android:onClick="@{()-> listener.clickDonate(item.requestId)}"
                             android:text="@string/donate"
                             android:textColor="@color/white" />
 
@@ -259,7 +261,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@color/grey"
-                            android:onClick="@{()-> listener.clickDetails()}"
+                            android:onClick="@{()-> listener.clickDetails(item.requestId)}"
                             android:text="@string/details"
                             android:textColor="@color/white" />
 
