@@ -45,10 +45,6 @@ class RequestDetailsActivity : BaseActivity<ActivityRequestDetailsBinding>(), Re
         submitUserDonation()
     }
 
-    override fun showLocation() {
-
-    }
-
     private fun submitUserDonation() {
         showLoading()
         val newElement = myPrefs.getUserDetails().id
