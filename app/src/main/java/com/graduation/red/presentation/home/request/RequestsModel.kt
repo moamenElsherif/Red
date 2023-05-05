@@ -1,6 +1,7 @@
 package com.graduation.red.presentation.home.request
 
 import android.os.Parcelable
+import com.google.android.gms.maps.model.LatLng
 import com.graduation.red.presentation.enums.ForWhoEnum
 import com.graduation.red.presentation.enums.RequestStatusEnum
 import kotlinx.parcelize.Parcelize
@@ -19,7 +20,10 @@ data class RequestsModel(
     val donationAddress: String = "",
     val messageToDonor: String = "",
     val verifiedDonorsId: List<String> = listOf(),
-    var gender: Int = 1
+    var gender: Int = 1,
+    var locationLat : Double? = null,
+    var locationLng : Double? = null,
+    var locationAddress: String = ""
 ):Parcelable {
 
     fun getForWhoString(): String {

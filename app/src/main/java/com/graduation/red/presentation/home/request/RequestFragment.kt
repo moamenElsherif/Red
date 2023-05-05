@@ -1,6 +1,11 @@
 package com.graduation.red.presentation.home.request
 
+import android.app.Activity
+import android.content.Intent
+import android.location.Geocoder
+import android.net.Uri
 import android.os.Bundle
+import android.telecom.TelecomManager.EXTRA_LOCATION
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
@@ -8,16 +13,20 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
+import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.gson.Gson
 import com.graduation.red.R
 import com.graduation.red.base.BaseFragment
 import com.graduation.red.base.pref.MyPrefs
 import com.graduation.red.databinding.FragmentRequestBinding
 import com.graduation.red.presentation.Constants
+import com.graduation.red.presentation.Constants.Companion.LOCATION_LAT_LNG
 import com.graduation.red.presentation.authentication.createaccount.CreateAccountModel
 import com.graduation.red.presentation.enums.ForWhoEnum
 import com.graduation.red.presentation.enums.GenderEnum
+import com.graduation.red.presentation.map.MapActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.util.*
@@ -47,7 +56,44 @@ class RequestFragment : BaseFragment<FragmentRequestBinding>(), AdapterView.OnIt
         handleBloodTypesSpinner()
         binding.bloodTypeSpinner.setSelection(0)
         binding.rbMe.isChecked = true
+        binding.openMaps.setOnClickListener {
+            val intent = Intent(this.requireContext() , MapActivity::class.java)
+            startActivityForResult(intent, LOCATION_LAT_LNG)
+        }
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == LOCATION_LAT_LNG) {
+            if (resultCode == Activity.RESULT_OK) {
+                try {
+                    val result = data?.getStringExtra("result")
+                    val selectedLatLng = Gson().fromJson(result, LatLng::class.java)
+                    updateUiWithSelectedLocation(selectedLatLng)
+                } catch (ex: Exception) {
+                    LatLng(0.0 , 0.0)
+                }
+            } else {
+                // Handle the case where the user canceled the operation
+            }
+        }
+    }
+
+    private fun updateUiWithSelectedLocation(selectedLatLng: LatLng?) {
+        requestsModel.locationLng = selectedLatLng?.longitude
+        requestsModel.locationLat = selectedLatLng?.latitude
+        val geocoder = Geocoder(this.requireContext(), Locale.getDefault())
+        val addresses = geocoder.getFromLocation(
+            selectedLatLng?.latitude!!,
+            selectedLatLng.longitude, 1)
+        if (addresses?.isNotEmpty() == true) {
+            val address = addresses[0]
+            val addressName = address.getAddressLine(0)
+            requestsModel.locationAddress = addressName
+            binding.getLocationOnMap.text = addressName
+        }
+    }
+
 
     private fun checkDataValid(): Boolean {
         if (forMeLiveData.value == false && binding.tvName.text.isEmpty()) {
@@ -59,19 +105,19 @@ class RequestFragment : BaseFragment<FragmentRequestBinding>(), AdapterView.OnIt
             return false
         }
         if (binding.etDay.text.toString().isEmpty() || binding.etDay.text.toString().length != 2) {
-            createToast("invalid date1")
+            createToast("invalid date")
             return false
         }
         if (binding.etMonth.text.toString()
                 .isEmpty() || binding.etMonth.text.toString().length != 2
         ) {
-            createToast("invalid date2")
+            createToast("invalid date")
             return false
         }
         if (binding.etYear.text.toString()
                 .isEmpty() || binding.etYear.text.toString().length != 4
         ) {
-            createToast("invalid date3")
+            createToast("invalid date")
             return false
         }
         if (binding.etPhoneNumber.text.isEmpty()) {
@@ -80,6 +126,14 @@ class RequestFragment : BaseFragment<FragmentRequestBinding>(), AdapterView.OnIt
         }
         if (binding.etDonationAddress.text.isEmpty()) {
             createToast("invalid address")
+            return false
+        }
+        if (requestsModel.locationLat == null){
+            createToast("select location on map")
+            return false
+        }
+        if (requestsModel.locationLng == null){
+            createToast("select location on map")
             return false
         }
         return true

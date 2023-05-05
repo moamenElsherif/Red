@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.FirebaseApp
+import com.google.gson.Gson
 import com.graduation.red.presentation.hideLoadingDialog
 import com.graduation.red.presentation.showLoadingDialog
 import java.lang.Exception
@@ -145,6 +146,11 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
     fun showLoading() {
         hideLoading()
         progressDialog = showLoadingDialog(this, null)
+    }
+
+
+    fun toGsonString(model: Any): String{
+        return Gson().toJson(model)
     }
 
     fun hideLoading() = hideLoadingDialog(progressDialog, this)
