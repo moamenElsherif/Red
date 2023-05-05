@@ -1,5 +1,6 @@
 package com.graduation.red.presentation.home.donate
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.FieldValue
@@ -11,8 +12,11 @@ import com.graduation.red.base.BaseFragment
 import com.graduation.red.base.pref.MyPrefs
 import com.graduation.red.databinding.FragmentDonateBinding
 import com.graduation.red.presentation.Constants
+import com.graduation.red.presentation.Constants.Companion.REQUEST_MODEL
 import com.graduation.red.presentation.Constants.Companion.RequestDocument
+import com.graduation.red.presentation.home.request.RequestFragment
 import com.graduation.red.presentation.home.request.RequestsModel
+import com.graduation.red.presentation.home.request.requestdetails.RequestDetailsActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -24,6 +28,8 @@ class DonateFragment : BaseFragment<FragmentDonateBinding>(), DonateListener {
     private val donateAdapter: DonateAdapter = DonateAdapter(this)
     private val db = Firebase.firestore
 
+    var list = listOf<RequestsModel>()
+
     @Inject
     lateinit var myPrefs: MyPrefs
 
@@ -31,14 +37,15 @@ class DonateFragment : BaseFragment<FragmentDonateBinding>(), DonateListener {
 
     override fun initUI(savedInstanceState: Bundle?) {
         getRequestsList()
+        initAdapter()
     }
 
     private fun getRequestsList() {
         showLoading()
         db.collection(RequestDocument).get().addOnSuccessListener {
             hideLoading()
-            val list = it.toObjects<RequestsModel>()
-            initAdapter(list)
+            list = getRequestListWithoutVerifiedRequests(it.toObjects())
+            updateAdapterList()
         }.addOnFailureListener {
             hideLoading()
             createToast(it.toString())
@@ -46,19 +53,22 @@ class DonateFragment : BaseFragment<FragmentDonateBinding>(), DonateListener {
     }
 
 
-    private fun initAdapter(result: List<RequestsModel>) {
+    private fun initAdapter() {
         binding.apply {
             rvRequest.apply {
                 layoutManager = LinearLayoutManager(requireContext()).apply {
                     this.isSmoothScrolling
                 }
                 setHasFixedSize(false)
-                val list = getRequestListWithoutVerifiedRequests(result)
-                donateAdapter.submitList(list)
                 adapter = donateAdapter
-                binding.tvRequestCount.text = list.size.toString()
             }
         }
+    }
+
+    private fun updateAdapterList() {
+        donateAdapter.submitList(list)
+        binding.tvRequestCount.text = list.size.toString()
+        donateAdapter.notifyDataSetChanged()
     }
 
     private fun getRequestListWithoutVerifiedRequests(result: List<RequestsModel>): List<RequestsModel> {
@@ -74,8 +84,10 @@ class DonateFragment : BaseFragment<FragmentDonateBinding>(), DonateListener {
         return list
     }
 
-    override fun clickDetails(requestId: String) {
-
+    override fun clickDetails(item: RequestsModel) {
+        val intent = Intent(this.requireContext()  , RequestDetailsActivity::class.java)
+        intent.putExtra(REQUEST_MODEL , item)
+        startActivity(intent)
     }
 
     override fun clickDonate(requestId: String) {
@@ -94,7 +106,7 @@ class DonateFragment : BaseFragment<FragmentDonateBinding>(), DonateListener {
 
     private fun submitUserDonation(requestId: String) {
         val newElement = myPrefs.getUserDetails().id
-        val document = db.collection(Constants.RequestDocument).document(requestId)
+        val document = db.collection(RequestDocument).document(requestId)
         document.update("verifiedDonorsId", FieldValue.arrayUnion(newElement))
             .addOnSuccessListener {
                 getRequestsList()

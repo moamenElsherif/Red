@@ -1,8 +1,11 @@
 package com.graduation.red.presentation.home.request
 
+import android.os.Parcelable
 import com.graduation.red.presentation.enums.ForWhoEnum
 import com.graduation.red.presentation.enums.RequestStatusEnum
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class RequestsModel(
     val requestId: String = "",
     val userId: String = "",
@@ -17,7 +20,7 @@ data class RequestsModel(
     val messageToDonor: String = "",
     val verifiedDonorsId: List<String> = listOf(),
     var gender: Int = 1
-) {
+):Parcelable {
 
     fun getForWhoString(): String {
         return if (forWho == ForWhoEnum.FOR_ME.value) "For Himself"

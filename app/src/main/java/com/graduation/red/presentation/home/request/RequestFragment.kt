@@ -103,7 +103,7 @@ class RequestFragment : BaseFragment<FragmentRequestBinding>(), AdapterView.OnIt
             verifiedPhoneNumber = binding.etPhoneNumber.text.toString(),
             donationAddress = binding.etDonationAddress.text.toString(),
             gender = getGender(),
-            verifiedDonorsId = listOf("moamen" , "elserif")
+            verifiedDonorsId = listOf()
         )
     }
 

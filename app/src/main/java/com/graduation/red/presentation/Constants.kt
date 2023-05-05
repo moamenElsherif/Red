@@ -4,5 +4,6 @@ class Constants {
     companion object {
         const val UsersDocument = "Users"
         const val RequestDocument = "Requests"
+        const val REQUEST_MODEL = "REQUEST_MODEL"
     }
 }

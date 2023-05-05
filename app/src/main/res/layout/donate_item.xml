@@ -261,7 +261,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@color/grey"
-                            android:onClick="@{()-> listener.clickDetails(item.requestId)}"
+                            android:onClick="@{()-> listener.clickDetails(item)}"
                             android:text="@string/details"
                             android:textColor="@color/white" />
 
