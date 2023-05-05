@@ -20,6 +20,7 @@ import com.graduation.red.presentation.enums.ForWhoEnum
 import com.graduation.red.presentation.enums.GenderEnum
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.util.*
 import javax.inject.Inject
 
 
@@ -93,6 +94,7 @@ class RequestFragment : BaseFragment<FragmentRequestBinding>(), AdapterView.OnIt
 
     private fun readyRequestModel(): RequestsModel {
         return requestsModel.copy(
+            requestId = generateRandomId(8),
             userId = userModel.id,
             firstName = getFirstName(),
             lastName = getLastName(),
@@ -101,8 +103,17 @@ class RequestFragment : BaseFragment<FragmentRequestBinding>(), AdapterView.OnIt
             verifiedPhoneNumber = binding.etPhoneNumber.text.toString(),
             donationAddress = binding.etDonationAddress.text.toString(),
             gender = getGender(),
-            verifiedDonorsId = listOf("moamen" , "elserif")
+            verifiedDonorsId = listOf()
         )
+    }
+
+    fun generateRandomId(length: Int): String {
+        val charPool: List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
+        val random = Random()
+        return (1..length)
+            .map { random.nextInt(charPool.size) }
+            .map(charPool::get)
+            .joinToString("")
     }
 
     private fun getDate(): String {
@@ -136,10 +147,11 @@ class RequestFragment : BaseFragment<FragmentRequestBinding>(), AdapterView.OnIt
     private fun saveData(requestsModel: RequestsModel) {
         viewLifecycleOwner.lifecycleScope.launch {
             showLoading()
-            db.collection(Constants.RequestDocument).document()
+            db.collection(Constants.RequestDocument).document(requestsModel.requestId)
                 .set(requestsModel).addOnSuccessListener {
                     hideLoading()
                     createToast("Request Successfully created")
+                    Log.e("generatedId" , requestsModel.requestId)
                 }.addOnFailureListener {
                     hideLoading()
                     createToast("failed -> $it")
