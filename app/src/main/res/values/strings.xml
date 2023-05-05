@@ -54,6 +54,12 @@
     <string name="by_verifying_donation_request_owner_will_be_notified">By verifying donation, request owner will be notified</string>
     <string name="request_details">Request Details</string>
     <string name="pick_location">Pick Location</string>
+    <string name="location_on_map">Location on Map</string>
+    <string name="donors_count">Donors count</string>
+    <string name="gender">Gender</string>
+    <string name="show_location_on_map">show location on map</string>
+    <string name="donation_text">Donation is a noble and selfless act that has the power to bring about positive change in the world. By giving to charitable causes, individuals and organizations can provide necessary resources and support to those in need, improving the lives of individuals and communities alike. Whether it is donating money, time, or resources, the act of giving can have a profound impact on both the giver and the recipient</string>
+    <string name="thank_you">Thank You</string>
 
     <string-array name="blood_types">
         <item>A+</item>

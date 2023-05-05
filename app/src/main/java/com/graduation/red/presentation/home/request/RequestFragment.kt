@@ -161,7 +161,7 @@ class RequestFragment : BaseFragment<FragmentRequestBinding>(), AdapterView.OnIt
         )
     }
 
-    fun generateRandomId(length: Int): String {
+    private fun generateRandomId(length: Int): String {
         val charPool: List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
         val random = Random()
         return (1..length)

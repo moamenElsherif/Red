@@ -127,6 +127,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/dot"
+                        android:textColor="@color/bean_red"
                         app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView2"
                         app:layout_constraintStart_toEndOf="@+id/appCompatTextView2"
                         app:layout_constraintTop_toTopOf="@+id/appCompatTextView2" />
@@ -178,6 +179,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/dot"
+                        android:textColor="@color/bean_red"
                         app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView3"
                         app:layout_constraintStart_toEndOf="@+id/appCompatTextView3"
                         app:layout_constraintTop_toTopOf="@+id/appCompatTextView3" />
@@ -208,6 +210,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/dot"
+                        android:textColor="@color/bean_red"
                         app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView4"
                         app:layout_constraintStart_toEndOf="@+id/appCompatTextView4"
                         app:layout_constraintTop_toTopOf="@+id/appCompatTextView4" />

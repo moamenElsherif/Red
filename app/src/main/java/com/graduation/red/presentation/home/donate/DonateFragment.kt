@@ -36,7 +36,6 @@ class DonateFragment : BaseFragment<FragmentDonateBinding>(), DonateListener {
     var verifiedRequestByUserCount = 0
 
     override fun initUI(savedInstanceState: Bundle?) {
-        getRequestsList()
         initAdapter()
     }
 
@@ -113,5 +112,10 @@ class DonateFragment : BaseFragment<FragmentDonateBinding>(), DonateListener {
             }.addOnFailureListener { e ->
                 createToast(e.toString())
             }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getRequestsList()
     }
 }

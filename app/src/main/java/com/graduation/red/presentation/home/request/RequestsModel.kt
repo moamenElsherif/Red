@@ -1,8 +1,8 @@
 package com.graduation.red.presentation.home.request
 
 import android.os.Parcelable
-import com.google.android.gms.maps.model.LatLng
 import com.graduation.red.presentation.enums.ForWhoEnum
+import com.graduation.red.presentation.enums.GenderEnum
 import com.graduation.red.presentation.enums.RequestStatusEnum
 import kotlinx.parcelize.Parcelize
 
@@ -30,4 +30,17 @@ data class RequestsModel(
         return if (forWho == ForWhoEnum.FOR_ME.value) "For Himself"
         else "For Other"
     }
+
+    fun fullName(): String{
+        return "$firstName $lastName"
+    }
+
+    fun donorsCount():String{
+        return verifiedDonorsId.size.toString()
+    }
+
+    fun getUserGender(): String{
+        return if (gender == GenderEnum.MALE.value) "Male" else "Female"
+    }
+
 }
