@@ -408,6 +408,40 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/appCompatTextView5" />
 
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/appCompatTextView15"
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:padding="7dp"
+                    android:text="@string/request_status"
+                    android:textColor="@color/black"
+                    app:layout_constraintStart_toStartOf="@+id/appCompatTextView5"
+                    app:layout_constraintTop_toBottomOf="@+id/appCompatTextView5" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/dot15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dot"
+                    android:textColor="@color/bean_red"
+                    app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView15"
+                    app:layout_constraintStart_toEndOf="@+id/appCompatTextView15"
+                    app:layout_constraintTop_toTopOf="@+id/appCompatTextView15" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:maxLines="4"
+                    android:text="@{item.getRequestStatus()}"
+                    android:textColor="@{item.getRequestStatusColor()}"
+                    app:layout_constraintBottom_toBottomOf="@+id/dot15"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/dot15"
+                    app:layout_constraintTop_toTopOf="@+id/dot15"
+                    tools:text="New" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <View

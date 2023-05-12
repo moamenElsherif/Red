@@ -8,7 +8,9 @@ data class CreateAccountModel(
     var gender: Int = 1,
     var id: String = "",
     var password: String = "",
-    var bloodType: String = ""
+    var bloodType: String = "",
+    var createdRequestList: List<String> = emptyList(),
+    var submittedDonateList: List<String> = emptyList()
 ){
 
     override fun toString(): String {
