@@ -2,6 +2,8 @@ package com.graduation.red.presentation.home.donate
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
@@ -18,6 +20,7 @@ import com.graduation.red.presentation.home.request.RequestFragment
 import com.graduation.red.presentation.home.request.RequestsModel
 import com.graduation.red.presentation.home.request.requestdetails.RequestDetailsActivity
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -28,12 +31,14 @@ class DonateFragment : BaseFragment<FragmentDonateBinding>(), DonateListener {
     private val donateAdapter: DonateAdapter = DonateAdapter(this)
     private val db = Firebase.firestore
 
-    var list = listOf<RequestsModel>()
+    private val viewModel: DonateViewModel by viewModels()
+
+    private var list = listOf<RequestsModel>()
 
     @Inject
     lateinit var myPrefs: MyPrefs
 
-    var verifiedRequestByUserCount = 0
+    private var verifiedRequestByUserCount = 0
 
     override fun initUI(savedInstanceState: Bundle?) {
         initAdapter()
@@ -44,10 +49,19 @@ class DonateFragment : BaseFragment<FragmentDonateBinding>(), DonateListener {
         db.collection(RequestDocument).get().addOnSuccessListener {
             hideLoading()
             list = getRequestListWithoutVerifiedRequests(it.toObjects())
-            updateAdapterList()
+            sortList()
         }.addOnFailureListener {
             hideLoading()
             createToast(it.toString())
+        }
+    }
+
+    private fun sortList() {
+        lifecycleScope.launch {
+            val lat = myPrefs.getUserLocation().latitude
+            val lng = myPrefs.getUserLocation().longitude
+            list = viewModel.sortLocationsByDistance(list , lat , lng)
+            updateAdapterList()
         }
     }
 
