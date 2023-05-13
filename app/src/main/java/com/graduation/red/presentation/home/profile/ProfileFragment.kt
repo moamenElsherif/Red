@@ -7,6 +7,7 @@ import com.graduation.red.base.BaseFragment
 import com.graduation.red.base.pref.MyPrefs
 import com.graduation.red.databinding.FragmentProfileBinding
 import com.graduation.red.presentation.authentication.AuthenticationActivity
+import com.graduation.red.presentation.home.profile.requests_summery.RequestsSummeryActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -20,10 +21,11 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
 
     override fun initUI(savedInstanceState: Bundle?) {
         binding.info = myPrefs.getUserDetails()
-        handleLogout()
+        handleClicks()
+
     }
 
-    private fun handleLogout() {
+    private fun handleClicks() {
         binding.btnLogout.setOnClickListener {
             LogoutCheckDialog().showDialog(
                 this.requireContext(),
@@ -34,6 +36,22 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                     }
                 })
         }
+
+        binding.profileView.setOnClickListener {
+            openProfileData()
+        }
+
+        binding.requestsView.setOnClickListener {
+            openRequests()
+        }
+    }
+
+    private fun openRequests() {
+        startActivity(Intent(this.requireActivity(), RequestsSummeryActivity::class.java))
+    }
+
+    private fun openProfileData() {
+
     }
 
     private fun logout() {
