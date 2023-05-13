@@ -34,7 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/bean_red"
-                android:text="@string/submit_request"
+                android:text="@string/submit_location"
                 android:textAllCaps="false"
                 android:textColor="@color/white" />
 

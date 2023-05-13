@@ -1,6 +1,7 @@
 package com.graduation.red.presentation.home.request
 
 import android.os.Parcelable
+import com.graduation.red.R
 import com.graduation.red.presentation.enums.ForWhoEnum
 import com.graduation.red.presentation.enums.GenderEnum
 import com.graduation.red.presentation.enums.RequestStatusEnum
@@ -41,6 +42,24 @@ data class RequestsModel(
 
     fun getUserGender(): String{
         return if (gender == GenderEnum.MALE.value) "Male" else "Female"
+    }
+
+    fun getRequestStatus():String{
+        return when(status){
+            RequestStatusEnum.NEW.value -> "New"
+            RequestStatusEnum.CLOSED.value -> "Expired"
+            RequestStatusEnum.CLOSED.value -> "Closed"
+            else -> "UnKnown"
+        }
+    }
+
+    fun getRequestStatusColor():Int{
+        return when(status){
+            RequestStatusEnum.NEW.value -> R.color.lime_green
+            RequestStatusEnum.CLOSED.value -> R.color.black
+            RequestStatusEnum.CLOSED.value -> R.color.dark_red
+            else -> R.color.black
+        }
     }
 
 }
