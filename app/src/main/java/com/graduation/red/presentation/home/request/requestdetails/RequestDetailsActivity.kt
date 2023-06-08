@@ -1,5 +1,7 @@
 package com.graduation.red.presentation.home.request.requestdetails
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
 import com.google.firebase.firestore.FieldValue
@@ -16,7 +18,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class RequestDetailsActivity : BaseActivity<ActivityRequestDetailsBinding>(), RequestDetailsListener {
+class RequestDetailsActivity : BaseActivity<ActivityRequestDetailsBinding>(),
+    RequestDetailsListener {
     override val layoutRes: Int
         get() = R.layout.activity_request_details
 
@@ -28,7 +31,7 @@ class RequestDetailsActivity : BaseActivity<ActivityRequestDetailsBinding>(), Re
     lateinit var myPrefs: MyPrefs
 
     override fun initUI(savedInstanceState: Bundle?) {
-        requestModel = intent.extras?.getParcelable(REQUEST_MODEL)?: RequestsModel()
+        requestModel = intent.extras?.getParcelable(REQUEST_MODEL) ?: RequestsModel()
         initData()
     }
 
@@ -43,6 +46,16 @@ class RequestDetailsActivity : BaseActivity<ActivityRequestDetailsBinding>(), Re
 
     override fun onSubmit() {
         submitUserDonation()
+    }
+
+    override fun navigateLocation(lat: String, lng: String) {
+        val uri = Uri.parse("google.navigation:q=$lat,$lng")
+        val intent = Intent(Intent.ACTION_VIEW, uri)
+        intent.setPackage("com.google.android.apps.maps")
+
+        if (intent.resolveActivity(packageManager) != null) {
+            startActivity(intent)
+        }
     }
 
     private fun submitUserDonation() {
