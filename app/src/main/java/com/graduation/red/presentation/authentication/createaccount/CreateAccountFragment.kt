@@ -78,6 +78,7 @@ class CreateAccountFragment : BaseFragment<FragmentCreateAccountBinding>(), OnIt
 
     private fun openMainActivity() {
         val intent = Intent(this.requireContext(), MainActivity::class.java )
+        startActivity(intent)
     }
 
     private fun getGender(): Int {

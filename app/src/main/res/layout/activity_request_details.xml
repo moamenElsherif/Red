@@ -470,11 +470,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/view16" />
 
             <TextView
+                android:id="@+id/navigate_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/thank_you"
+                android:text="@string/navigate_to_location"
                 android:textColor="@color/bean_red"
                 android:textSize="20sp"
+                android:onClick="@{()->listener.navigateLocation(item.getLatString() , item.getLngString())}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"

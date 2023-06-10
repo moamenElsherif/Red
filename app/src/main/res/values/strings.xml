@@ -65,6 +65,7 @@
     <string name="request_status">Request Status</string>
     <string name="profile_data">Profile Data</string>
     <string name="log_out">Log out</string>
+    <string name="navigate_to_location">Navigate to Location</string>
 
     <string-array name="blood_types">
         <item>A+</item>

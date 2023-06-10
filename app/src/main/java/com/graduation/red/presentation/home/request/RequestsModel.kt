@@ -27,6 +27,9 @@ data class RequestsModel(
     var locationAddress: String = ""
 ):Parcelable {
 
+    fun getLatString() = locationLat.toString()
+    fun getLngString() = locationLng.toString()
+
     fun getForWhoString(): String {
         return if (forWho == ForWhoEnum.FOR_ME.value) "For Himself"
         else "For Other"
