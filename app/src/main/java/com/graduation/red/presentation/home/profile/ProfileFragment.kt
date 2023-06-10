@@ -22,7 +22,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
     override fun initUI(savedInstanceState: Bundle?) {
         binding.info = myPrefs.getUserDetails()
         handleClicks()
-
     }
 
     private fun handleClicks() {
@@ -51,7 +50,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
     }
 
     private fun openProfileData() {
-
+        startActivity(Intent(this.requireContext() , EditProfileActivity::class.java))
     }
 
     private fun logout() {

@@ -17,6 +17,9 @@
         android:theme="@style/Theme.Red"
         tools:targetApi="31">
         <activity
+            android:name=".presentation.home.profile.EditProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.home.profile.requests_summery.RequestsSummeryActivity"
             android:exported="false" />
 

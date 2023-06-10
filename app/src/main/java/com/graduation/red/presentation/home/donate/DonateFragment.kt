@@ -79,10 +79,11 @@ class DonateFragment : BaseFragment<FragmentDonateBinding>(), DonateListener {
     }
 
     private fun updateAdapterList() {
-        donateAdapter.submitList(list.filter {
+        val finalList = list.filter {
             it.status == RequestStatusEnum.NEW.value
-        })
-        binding.tvRequestCount.text = list.size.toString()
+        }
+        donateAdapter.submitList(finalList)
+        binding.tvRequestCount.text = finalList.size.toString()
         donateAdapter.notifyDataSetChanged()
     }
 
