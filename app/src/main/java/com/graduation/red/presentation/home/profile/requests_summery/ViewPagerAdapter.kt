@@ -8,9 +8,9 @@ class ViewPagerAdapter(fragmentManager: FragmentManager) : FragmentPagerAdapter(
 
     override fun getItem(position: Int): Fragment {
         return when (position) {
-            0 -> ActiveRequestsFragment()
-            1 -> ExpiredRequestsFragment()
-            else -> ActiveRequestsFragment()
+            0 -> MyRequestsFragment()
+            1 -> SubmittedRequestsFragment()
+            else -> MyRequestsFragment()
         }
     }
 
@@ -20,9 +20,9 @@ class ViewPagerAdapter(fragmentManager: FragmentManager) : FragmentPagerAdapter(
 
     override fun getPageTitle(position: Int): CharSequence? {
         return when (position) {
-            0 -> "Active"
-            1 -> "Expired"
-            else -> null
+            0 -> "Mine"
+            1 -> "Submitted"
+            else -> "Mine"
         }
     }
 

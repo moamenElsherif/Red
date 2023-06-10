@@ -9,9 +9,10 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.home.profile.requests_summery.ExpiredRequestsFragment">
+        tools:context=".presentation.home.profile.requests_summery.SubmittedRequestsFragment">
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_requests"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginHorizontal="5dp"

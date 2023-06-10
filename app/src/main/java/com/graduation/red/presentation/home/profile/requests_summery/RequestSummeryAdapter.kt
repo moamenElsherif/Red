@@ -25,6 +25,7 @@ class RequestSummeryAdapter(val listener: RequestSummeryListener) :
 
         fun bind(requestModel: RequestsModel, donateListener: RequestSummeryListener) {
             binding.apply {
+                binding.tvStatus.setTextColor(requestModel.getRequestStatusColor())
                 item = requestModel
                 listener = donateListener
                 executePendingBindings()
