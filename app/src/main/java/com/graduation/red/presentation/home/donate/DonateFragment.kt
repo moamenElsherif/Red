@@ -16,7 +16,6 @@ import com.graduation.red.databinding.FragmentDonateBinding
 import com.graduation.red.presentation.Constants
 import com.graduation.red.presentation.Constants.Companion.REQUEST_MODEL
 import com.graduation.red.presentation.Constants.Companion.RequestDocument
-import com.graduation.red.presentation.home.request.RequestFragment
 import com.graduation.red.presentation.home.request.RequestsModel
 import com.graduation.red.presentation.home.request.requestdetails.RequestDetailsActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -123,9 +122,20 @@ class DonateFragment : BaseFragment<FragmentDonateBinding>(), DonateListener {
         document.update("verifiedDonorsId", FieldValue.arrayUnion(newElement))
             .addOnSuccessListener {
                 getRequestsList()
+                addToUserDonationList(requestId)
             }.addOnFailureListener { e ->
                 createToast(e.toString())
             }
+    }
+
+    private fun addToUserDonationList(requestId: String) {
+        lifecycleScope.launch {
+            val userDocument = db.collection(Constants.UsersDocument).document(myPrefs.getUserDetails().id)
+            userDocument.update("submittedDonateList" , FieldValue.arrayUnion(requestId))
+                .addOnFailureListener {
+                    createToast("unknown error")
+                }
+        }
     }
 
     override fun onResume() {

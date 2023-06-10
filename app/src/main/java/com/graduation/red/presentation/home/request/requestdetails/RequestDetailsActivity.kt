@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -15,6 +16,7 @@ import com.graduation.red.presentation.Constants
 import com.graduation.red.presentation.Constants.Companion.REQUEST_MODEL
 import com.graduation.red.presentation.home.request.RequestsModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -65,10 +67,21 @@ class RequestDetailsActivity : BaseActivity<ActivityRequestDetailsBinding>(),
         document.update("verifiedDonorsId", FieldValue.arrayUnion(newElement))
             .addOnSuccessListener {
                 hideLoading()
+                addToUserDonationList(requestModel.requestId)
                 onBack()
             }.addOnFailureListener { e ->
                 Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show()
             }
+    }
+
+    private fun addToUserDonationList(requestId: String) {
+        lifecycleScope.launch {
+            val userDocument = db.collection(Constants.UsersDocument).document(myPrefs.getUserDetails().id)
+            userDocument.update("submittedDonateList" , FieldValue.arrayUnion(requestId))
+                .addOnFailureListener {
+                    Toast.makeText(this@RequestDetailsActivity, "unknown error", Toast.LENGTH_SHORT).show()
+                }
+        }
     }
 
 }

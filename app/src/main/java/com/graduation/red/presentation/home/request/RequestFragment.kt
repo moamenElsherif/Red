@@ -3,9 +3,7 @@ package com.graduation.red.presentation.home.request
 import android.app.Activity
 import android.content.Intent
 import android.location.Geocoder
-import android.net.Uri
 import android.os.Bundle
-import android.telecom.TelecomManager.EXTRA_LOCATION
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
@@ -14,6 +12,7 @@ import android.widget.Spinner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.maps.model.LatLng
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
@@ -29,7 +28,8 @@ import com.graduation.red.presentation.enums.GenderEnum
 import com.graduation.red.presentation.map.MapActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import java.util.*
+import java.util.Locale
+import java.util.Random
 import javax.inject.Inject
 
 
@@ -204,11 +204,23 @@ class RequestFragment : BaseFragment<FragmentRequestBinding>(), AdapterView.OnIt
             db.collection(Constants.RequestDocument).document(requestsModel.requestId)
                 .set(requestsModel).addOnSuccessListener {
                     hideLoading()
+                    addRequestToUser(requestsModel.requestId)
                     createToast("Request Successfully created")
-                    Log.e("generatedId" , requestsModel.requestId)
+                    Log.e("generatedId", requestsModel.requestId)
                 }.addOnFailureListener {
                     hideLoading()
                     createToast("failed -> $it")
+                }
+        }
+    }
+
+    private fun addRequestToUser(requestId: String) {
+        lifecycleScope.launch {
+            val userDocument =
+                db.collection(Constants.UsersDocument).document(myPrefs.getUserDetails().id)
+            userDocument.update("createdRequestList", FieldValue.arrayUnion(requestId))
+                .addOnFailureListener {
+                    createToast("unknown error")
                 }
         }
     }
