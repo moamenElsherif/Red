@@ -16,6 +16,7 @@ import com.graduation.red.databinding.FragmentDonateBinding
 import com.graduation.red.presentation.Constants
 import com.graduation.red.presentation.Constants.Companion.REQUEST_MODEL
 import com.graduation.red.presentation.Constants.Companion.RequestDocument
+import com.graduation.red.presentation.enums.RequestStatusEnum
 import com.graduation.red.presentation.home.request.RequestsModel
 import com.graduation.red.presentation.home.request.requestdetails.RequestDetailsActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -78,7 +79,9 @@ class DonateFragment : BaseFragment<FragmentDonateBinding>(), DonateListener {
     }
 
     private fun updateAdapterList() {
-        donateAdapter.submitList(list)
+        donateAdapter.submitList(list.filter {
+            it.status == RequestStatusEnum.NEW.value
+        })
         binding.tvRequestCount.text = list.size.toString()
         donateAdapter.notifyDataSetChanged()
     }
@@ -99,6 +102,7 @@ class DonateFragment : BaseFragment<FragmentDonateBinding>(), DonateListener {
     override fun clickDetails(item: RequestsModel) {
         val intent = Intent(this.requireContext()  , RequestDetailsActivity::class.java)
         intent.putExtra(REQUEST_MODEL , item)
+        intent.putExtra(Constants.SHOW_CLOSE_BTN , false)
         startActivity(intent)
     }
 

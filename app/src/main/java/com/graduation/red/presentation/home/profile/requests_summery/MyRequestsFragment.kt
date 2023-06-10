@@ -37,6 +37,10 @@ class MyRequestsFragment : BaseFragment<FragmentActiveRequestsBinding>() ,Reques
     override fun initUI(savedInstanceState: Bundle?) {
         requestAdapter = RequestSummeryAdapter(this , this.requireContext())
         initAdapter()
+    }
+
+    override fun onResume() {
+        super.onResume()
         getMyRequestList()
     }
 
@@ -80,12 +84,13 @@ class MyRequestsFragment : BaseFragment<FragmentActiveRequestsBinding>() ,Reques
     }
 
     private fun updateAdapter() {
-        requestAdapter.submitList(list)
+        requestAdapter.submitList(list.asReversed())
     }
 
     override fun onItemClick(item: RequestsModel) {
         val intent = Intent(this.requireContext()  , RequestDetailsActivity::class.java)
         intent.putExtra(Constants.REQUEST_MODEL, item)
+        intent.putExtra(Constants.SHOW_CLOSE_BTN , true)
         startActivity(intent)
     }
 }

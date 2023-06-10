@@ -76,12 +76,13 @@ class SubmittedRequestsFragment :BaseFragment<FragmentExpiredRequestsBinding>(),
     }
 
     private fun updateAdapter() {
-        requestAdapter.submitList(list)
+        requestAdapter.submitList(list.asReversed())
     }
 
     override fun onItemClick(item: RequestsModel) {
         val intent = Intent(this.requireContext()  , RequestDetailsActivity::class.java)
         intent.putExtra(Constants.REQUEST_MODEL, item)
+        intent.putExtra(Constants.SHOW_CLOSE_BTN , false)
         startActivity(intent)
     }
 }
