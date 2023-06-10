@@ -1,14 +1,16 @@
 package com.graduation.red.presentation.home.profile.requests_summery
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.graduation.red.base.DiffCallback
 import com.graduation.red.databinding.RequestStatusItemBinding
 import com.graduation.red.presentation.home.request.RequestsModel
 
-class RequestSummeryAdapter(val listener: RequestSummeryListener) :
+class RequestSummeryAdapter(val listener: RequestSummeryListener , val context: Context) :
     ListAdapter<RequestsModel, RequestSummeryAdapter.RequestItemViewHolder>(DiffCallback<RequestsModel>()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RequestItemViewHolder {
@@ -17,15 +19,15 @@ class RequestSummeryAdapter(val listener: RequestSummeryListener) :
 
     override fun onBindViewHolder(holder: RequestItemViewHolder, position: Int) {
         val requestItem = getItem(position)
-        holder.bind(requestItem, listener)
+        holder.bind(requestItem, listener , context)
     }
 
     class RequestItemViewHolder(private val binding: RequestStatusItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(requestModel: RequestsModel, donateListener: RequestSummeryListener) {
+        fun bind(requestModel: RequestsModel, donateListener: RequestSummeryListener, context: Context) {
             binding.apply {
-                binding.tvStatus.setTextColor(requestModel.getRequestStatusColor())
+                binding.tvStatus.setTextColor(ContextCompat.getColor(context , requestModel.getRequestStatusColor()))
                 item = requestModel
                 listener = donateListener
                 executePendingBindings()

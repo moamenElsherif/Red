@@ -30,11 +30,12 @@ class MyRequestsFragment : BaseFragment<FragmentActiveRequestsBinding>() ,Reques
 
     private val list:  MutableList<RequestsModel> = mutableListOf()
     private val db = Firebase.firestore
-    private val requestAdapter: RequestSummeryAdapter = RequestSummeryAdapter(this)
+    private lateinit var requestAdapter: RequestSummeryAdapter
     @Inject
     lateinit var myPrefs: MyPrefs
 
     override fun initUI(savedInstanceState: Bundle?) {
+        requestAdapter = RequestSummeryAdapter(this , this.requireContext())
         initAdapter()
         getMyRequestList()
     }
