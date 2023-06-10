@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.graduation.red.presentation.home.request.RequestsModel" />
+
+        <variable
+            name="listener"
+            type="com.graduation.red.presentation.home.profile.requests_summery.RequestSummeryListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="5dp">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            app:cardBackgroundColor="@color/off_white"
+            app:cardCornerRadius="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="@{()-> listener.onItemClick(item)}">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView2"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    app:cardBackgroundColor="@color/bean_red"
+                    app:cardCornerRadius="100dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_blood_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@{item.requestedBloodType}"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        tools:text="A+" />
+                </androidx.cardview.widget.CardView>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/cardView2"
+                    app:layout_constraintStart_toEndOf="@+id/cardView2"
+                    app:layout_constraintTop_toTopOf="@+id/cardView2">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/user_name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="3dp"
+                        android:text="@{item.firstName}"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="Moamen" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/appCompatTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="2dp"
+                        android:text="@string/wants_blood_for"
+                        android:textAlignment="center"
+                        android:textColor="@color/bean_red"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/user_name"
+                        app:layout_constraintStart_toEndOf="@+id/user_name"
+                        app:layout_constraintTop_toTopOf="@+id/user_name" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/to_who"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="@{item.getForWhoString()}"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@+id/user_name"
+                        app:layout_constraintTop_toBottomOf="@+id/user_name"
+                        tools:text="himself" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:paddingHorizontal="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/dot1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/dot"
+                        android:textColor="@color/bean_red"
+                        app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView2"
+                        app:layout_constraintStart_toEndOf="@+id/appCompatTextView2"
+                        app:layout_constraintTop_toTopOf="@+id/appCompatTextView2" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:singleLine="true"
+                        android:text="@{item.verifiedPhoneNumber}"
+                        app:layout_constraintBottom_toBottomOf="@+id/dot1"
+                        app:layout_constraintStart_toEndOf="@+id/dot1"
+                        app:layout_constraintTop_toTopOf="@+id/dot1"
+                        tools:text="01112892080" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/appCompatTextView2"
+                        android:layout_width="75dp"
+                        android:layout_height="wrap_content"
+                        android:padding="2dp"
+                        android:text="@string/mobile"
+                        android:textColor="@color/grey"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/appCompatTextView3"
+                        android:layout_width="75dp"
+                        android:layout_height="wrap_content"
+                        android:padding="2dp"
+                        android:text="@string/address"
+                        android:textColor="@color/grey"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView2" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:singleLine="true"
+                        android:text="@{item.donationAddress}"
+                        app:layout_constraintBottom_toBottomOf="@+id/dot2"
+                        app:layout_constraintStart_toEndOf="@+id/dot2"
+                        app:layout_constraintTop_toTopOf="@+id/dot2"
+                        tools:text="15, tahrir street London" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/dot2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/dot"
+                        android:textColor="@color/bean_red"
+                        app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView3"
+                        app:layout_constraintStart_toEndOf="@+id/appCompatTextView3"
+                        app:layout_constraintTop_toTopOf="@+id/appCompatTextView3" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/appCompatTextView4"
+                        android:layout_width="75dp"
+                        android:layout_height="wrap_content"
+                        android:padding="2dp"
+                        android:text="date"
+                        android:textColor="@color/grey"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView3" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:maxLines="4"
+                        android:text="@{item.date}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/dot3"
+                        app:layout_constraintTop_toTopOf="@+id/dot3"
+                        tools:text="02/05/2023" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/dot3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/dot"
+                        android:textColor="@color/bean_red"
+                        app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView4"
+                        app:layout_constraintStart_toEndOf="@+id/appCompatTextView4"
+                        app:layout_constraintTop_toTopOf="@+id/appCompatTextView4" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
