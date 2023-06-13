@@ -26,7 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:textAlignment="center"
-        android:text="@string/by_verifying_donation_request_owner_will_be_notified"
+        android:text="@string/you_can_safely_donate_every_3_months"
         android:textSize="14sp"
         android:padding="5dp"
         app:layout_constraintEnd_toEndOf="parent"

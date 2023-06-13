@@ -68,6 +68,7 @@
     <string name="navigate_to_location">Navigate to Location</string>
     <string name="close">Close</string>
     <string name="update">Update</string>
+    <string name="you_can_safely_donate_every_3_months">You Can Safely donate every 3 Months</string>
 
     <string-array name="blood_types">
         <item>A+</item>

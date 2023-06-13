@@ -35,26 +35,24 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
         Handler(Looper.getMainLooper()).postDelayed({
-            if (myPrefs.getTutorialState() != "displayed")
-                showTutorial()
-            else{
-                openMain()
-            }
+                if (myPrefs.getUserDetails().id.isNotEmpty()) openMain()
+                else openAuth()
         }, 3000)
     }
 
-    private fun showTutorial(){
-        val intent = Intent(this , TutorialActivity::class.java)
+    private fun showTutorial() {
+        val intent = Intent(this, TutorialActivity::class.java)
         startActivity(intent)
         finish()
     }
 
-    private fun openMain(){
+    private fun openMain() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
     }
-    private fun openAuth(){
+
+    private fun openAuth() {
         val intent = Intent(this, AuthenticationActivity::class.java)
         startActivity(intent)
         finish()
