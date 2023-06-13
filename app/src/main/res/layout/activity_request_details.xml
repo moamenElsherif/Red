@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View"/>
+
         <variable
             name="item"
             type="com.graduation.red.presentation.home.request.RequestsModel" />
@@ -531,6 +533,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
             app:cardCornerRadius="5dp"
+            android:visibility="@{item.status == 1 ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

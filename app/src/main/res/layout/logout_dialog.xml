@@ -5,7 +5,7 @@
     android:layout_width="300dp"
     android:layout_height="200dp"
     android:layout_gravity="center"
-    android:background="@drawable/bg_off_white">
+    android:background="@drawable/bg_grey">
 
     <TextView
         android:id="@+id/textView7"

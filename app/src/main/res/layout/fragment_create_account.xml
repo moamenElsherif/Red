@@ -120,7 +120,7 @@
                     android:id="@+id/view"
                     android:layout_width="1dp"
                     android:layout_height="0dp"
-                    android:background="@color/black"
+                    android:background="@color/bright_red"
                     app:layout_constraintBottom_toTopOf="@+id/tv_password"
                     app:layout_constraintEnd_toStartOf="@+id/tv_last_name"
                     app:layout_constraintHorizontal_bias="0.5"
@@ -148,7 +148,7 @@
                     android:id="@+id/view3"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/black"
+                    android:background="@color/bright_red"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
@@ -173,7 +173,7 @@
                     android:id="@+id/view4"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/black"
+                    android:background="@color/bright_red"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
@@ -198,7 +198,7 @@
                     android:id="@+id/view5"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/black"
+                    android:background="@color/bright_red"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
@@ -223,7 +223,7 @@
                     android:id="@+id/view15"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/black"
+                    android:background="@color/bright_red"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
@@ -261,7 +261,7 @@
                         android:id="@+id/view6"
                         android:layout_width="1dp"
                         android:layout_height="match_parent"
-                        android:background="@color/black" />
+                        android:background="@color/bright_red" />
 
                     <RadioButton
                         android:id="@+id/rb_female"
@@ -282,7 +282,7 @@
                     android:id="@+id/view7"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/black"
+                    android:background="@color/bright_red"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
@@ -333,6 +333,7 @@
                 android:layout_height="match_parent"
                 android:background="@color/bean_red"
                 android:text="@string/register"
+                android:textSize="18sp"
                 android:textAllCaps="false"
                 android:textColor="@color/white" />
 
