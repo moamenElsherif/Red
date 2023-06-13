@@ -78,6 +78,7 @@
                 android:id="@+id/header"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
+                android:elevation="10dp"
                 android:layout_marginTop="5dp"
                 app:cardBackgroundColor="@color/bright_red"
                 app:cardCornerRadius="100dp"
@@ -87,7 +88,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="84dp"
                     android:layout_margin="10dp"
                     android:background="@drawable/bg_white_cornered">
 
@@ -123,6 +124,7 @@
                 android:background="@drawable/bg_grey"
                 android:inputType="textPersonName"
                 android:padding="10dp"
+                android:elevation="10dp"
                 android:textColor="@color/black"
                 android:text="@{item.firstName}"
                 android:textColorHint="@color/grey"
@@ -142,6 +144,7 @@
                 android:layout_marginTop="10dp"
                 android:background="@drawable/bg_grey"
                 android:inputType="textPersonName"
+                android:elevation="10dp"
                 android:padding="10dp"
                 android:text="@{item.lastName}"
                 android:textColor="@color/black"
@@ -161,6 +164,7 @@
                 android:background="@drawable/bg_grey"
                 android:orientation="horizontal"
                 android:weightSum="2"
+                android:elevation="10dp"
                 app:layout_constraintEnd_toEndOf="@+id/tv_last_name"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="@+id/tv_last_name"
@@ -213,6 +217,7 @@
                 android:background="@drawable/bg_grey"
                 android:inputType="phone"
                 android:padding="10dp"
+                android:elevation="10dp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/grey"
                 tools:text="@string/first_name"
@@ -228,6 +233,7 @@
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="5dp"
                 android:layout_marginTop="20dp"
+                android:elevation="10dp"
                 android:layout_marginBottom="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"

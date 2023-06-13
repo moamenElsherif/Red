@@ -30,17 +30,26 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
+            <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
+                android:layout_marginStart="10dp"
+                app:cardCornerRadius="100dp"
+                android:layout_margin="5dp"
                 android:onClick="@{()->listener.onBack()}"
-                android:padding="10dp"
-                android:rotation="180"
-                android:src="@drawable/arrow_orange"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/btn_back"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="10dp"
+                    android:rotation="180"
+                    android:src="@drawable/arrow_orange" />
+            </androidx.cardview.widget.CardView>
+
 
             <TextView
                 android:layout_width="wrap_content"
@@ -91,27 +100,43 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view15">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView2"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="15dp"
-                app:cardBackgroundColor="@color/bean_red"
-                app:cardCornerRadius="100dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView2"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    app:cardBackgroundColor="@color/bright_red"
+                    app:cardCornerRadius="100dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_blood_type"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@{item.requestedBloodType}"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    tools:text="A+" />
-            </androidx.cardview.widget.CardView>
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/bg_white_cornered">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_blood_type"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@{item.requestedBloodType}"
+                            android:textColor="@color/bright_red"
+                            android:textSize="30sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.5"
+                            tools:text="A+" />
+
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout"
@@ -205,7 +230,7 @@
                     android:layout_marginTop="10dp"
                     android:padding="7dp"
                     android:text="@string/mobile"
-                    android:textColor="@color/black"
+                    android:textColor="@color/bright_red"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -215,7 +240,7 @@
                     android:layout_height="wrap_content"
                     android:padding="7dp"
                     android:text="@string/address"
-                    android:textColor="@color/black"
+                    android:textColor="@color/bright_red"
                     app:layout_constraintStart_toStartOf="@+id/appCompatTextView2"
                     app:layout_constraintTop_toBottomOf="@+id/appCompatTextView2" />
 
@@ -247,7 +272,7 @@
                     android:layout_height="wrap_content"
                     android:padding="7dp"
                     android:text="@string/message"
-                    android:textColor="@color/black"
+                    android:textColor="@color/bright_red"
                     app:layout_constraintStart_toStartOf="@+id/appCompatTextView3"
                     app:layout_constraintTop_toBottomOf="@+id/appCompatTextView3" />
 
@@ -281,7 +306,7 @@
                     android:layout_height="wrap_content"
                     android:padding="7dp"
                     android:text="@string/request_date"
-                    android:textColor="@color/black"
+                    android:textColor="@color/bright_red"
                     app:layout_constraintStart_toStartOf="@+id/appCompatTextView4"
                     app:layout_constraintTop_toBottomOf="@+id/appCompatTextView4" />
 
@@ -315,7 +340,7 @@
                     android:layout_height="wrap_content"
                     android:padding="7dp"
                     android:text="@string/donors_count"
-                    android:textColor="@color/black"
+                    android:textColor="@color/bright_red"
                     app:layout_constraintStart_toStartOf="@+id/appCompatTextView6"
                     app:layout_constraintTop_toBottomOf="@+id/appCompatTextView6" />
 
@@ -349,7 +374,7 @@
                     android:layout_height="wrap_content"
                     android:padding="7dp"
                     android:text="@string/gender"
-                    android:textColor="@color/black"
+                    android:textColor="@color/bright_red"
                     app:layout_constraintStart_toStartOf="@+id/appCompatTextView7"
                     app:layout_constraintTop_toBottomOf="@+id/appCompatTextView7" />
 
@@ -384,7 +409,7 @@
                     android:layout_height="wrap_content"
                     android:padding="7dp"
                     android:text="@string/map_location"
-                    android:textColor="@color/black"
+                    android:textColor="@color/bright_red"
                     app:layout_constraintStart_toStartOf="@+id/appCompatTextView8"
                     app:layout_constraintTop_toBottomOf="@+id/appCompatTextView8" />
 
@@ -427,7 +452,7 @@
                     android:layout_height="wrap_content"
                     android:padding="7dp"
                     android:text="@string/request_status"
-                    android:textColor="@color/black"
+                    android:textColor="@color/bright_red"
                     app:layout_constraintStart_toStartOf="@+id/appCompatTextView5"
                     app:layout_constraintTop_toBottomOf="@+id/appCompatTextView5" />
 
@@ -489,6 +514,7 @@
                 android:text="@string/navigate_to_location"
                 android:textColor="@color/bean_red"
                 android:textSize="20sp"
+                android:elevation="10dp"
                 android:onClick="@{()->listener.navigateLocation(item.getLatString() , item.getLngString())}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
